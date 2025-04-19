@@ -1,0 +1,15 @@
+# Ignore all node modules and backups
+node_modules/
+app/node_modules/
+app/node_modules_backup/
+
+# Laravel and PHP
+vendor/
+.env
+*.log
+
+# Docker volumes and config overrides
+db_data/
+docker-compose.override.yml
+docker-compose.dev.yml
+docker-compose.local.yml
