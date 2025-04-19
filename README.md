@@ -17,8 +17,8 @@ This project is a Dockerized Laravel-based landing page for **Milestar Trade and
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/EmmanuelFame/fame-landing-page.git
-   cd fame-landing-page
+   git clone https://github.com/EmmanuelFame/fame.git
+   cd fame
    ```
 
 2. Start the local containers:
@@ -42,7 +42,7 @@ Edit files inside the `app/` directory as needed.
 
 ```bash
 git add .
-git commit -m "✨ Update something cool"
+git commit -m "✨ Update something cool to My Milestar sites"
 git push
 ```
 
