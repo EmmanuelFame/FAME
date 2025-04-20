@@ -72,13 +72,57 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 @endpush
 
-<section class="relative overflow-hidden bg-center h-[85vh] "
-         style="background-image: url('{{ asset('images/wheaty.png') }}');">
+<section class="relative overflow-hidden h-[85vh]">
 
-   
+    <!-- Flowbite Carousel -->
+    <div id="hero-carousel" class="relative w-full h-full" data-carousel="static">
+        <!-- Carousel wrapper -->
+        <div class="relative h-full overflow-hidden rounded-lg">
+
+            <!-- Slides -->
+            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+                 style="background-image: url('{{ asset('images/wheaty.png') }}');"
+                 data-carousel-item>
+            </div>
+
+            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+                 style="background-image: url('{{ asset('images/wheat_port2.png') }}');"
+                 data-carousel-item>
+            </div>
+
+            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+                 style="background-image: url('{{ asset('images/wheat_port3.png') }}');"
+                 data-carousel-item>
+            </div>
+
+            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+                 style="background-image: url('{{ asset('images/wheaty_port.png') }}');"
+                 data-carousel-item>
+            </div>
+
+        </div>
+
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
 
     <!-- CTA BUTTON centered -->
-    <div class="relative z-10 flex flex-col items-center justify-end h-full pb-15">
+    <div class="absolute inset-0 z-10 flex flex-col items-center justify-end pb-16">
         <a href="#services"
            data-aos="zoom-in" data-aos-delay="300"
            class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg hover:bg-yellow-700 rounded-xl hover:scale-105">
@@ -87,13 +131,11 @@
     </div>
 
     <!-- Pulsating Glow Balls -->
-<div class="absolute duration-1000 rounded-full bg-fuchsia-400 opacity-70 -bottom-10 -left-10 w-72 h-72 filter blur-2xl animate-pulse"></div>
-
-<div class="absolute duration-1000 delay-200 bg-orange-500 rounded-full opacity-100 -top-10 right-10 w-60 h-60 filter blur-2xl animate-pulse"></div>
-
-<div class="absolute delay-700 bg-white rounded-full opacity-50 bottom-24 left-1/2 w-52 h-52 filter blur-2xl animate-ping duration-7000"></div>
-
+    <div class="absolute duration-1000 rounded-full bg-fuchsia-400 opacity-70 -bottom-10 -left-10 w-72 h-72 filter blur-2xl animate-pulse"></div>
+    <div class="absolute duration-1000 delay-200 bg-orange-500 rounded-full opacity-100 -top-10 right-10 w-60 h-60 filter blur-2xl animate-pulse"></div>
+    <div class="absolute delay-700 bg-white rounded-full opacity-50 bottom-24 left-1/2 w-52 h-52 filter blur-2xl animate-ping duration-7000"></div>
 </section>
+
 
 
 @push('scripts')
