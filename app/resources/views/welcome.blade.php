@@ -116,19 +116,19 @@
         <div class="relative h-full overflow-hidden rounded-lg">
             <!-- Item 1 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item="active">
-                <img src="{{ asset('images/wheaty.webp') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
             <!-- Item 2 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port2.webp') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+                <img src="{{ asset('images/wheaty_port2.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
             <!-- Item 3 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port3.webp') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+                <img src="{{ asset('images/wheaty_port3.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
             <!-- Item 4 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port.webp') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+                <img src="{{ asset('images/wheaty_port.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
         </div>
 
