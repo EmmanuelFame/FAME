@@ -80,8 +80,8 @@
               position: fixed;
               top: 0;
               left: 0;
-              width: 80px;
-              height: 80px;
+              width: 100px;
+              height: 100px;
               z-index: 50;
               animation: sail-around 20s linear infinite;
             }
