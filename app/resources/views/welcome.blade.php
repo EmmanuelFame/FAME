@@ -72,65 +72,74 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 @endpush
 
-<section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
+<div id="indicators-carousel" class="relative w-full h-[70vh] sm:h-[75vh] md:h-[90vh]" data-carousel="slide" data-carousel-interval="5000">
+    <!-- Carousel wrapper -->
+    <div class="relative h-full overflow-hidden rounded-lg">
 
-    <!-- Flowbite Carousel -->
-    <div id="hero-carousel" class="relative w-full h-full" data-carousel="static">
-        <!-- Carousel wrapper -->
-        <div class="relative w-full h-full overflow-hidden rounded-lg">
-
-            <!-- Slides -->
-            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
-                 style="background-image: url('{{ asset('images/wheaty.png') }}');"
-                 data-carousel-item></div>
-
-            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
-                 style="background-image: url('{{ asset('images/wheaty_port2.png') }}');"
-                 data-carousel-item></div>
-
-            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
-                 style="background-image: url('{{ asset('images/wheaty_port3.png') }}');"
-                 data-carousel-item></div>
-
-            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
-                 style="background-image: url('{{ asset('images/wheaty_port.png') }}');"
-                 data-carousel-item></div>
-
+        <!-- Slide 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+            <img src="{{ asset('images/wheaty.png') }}"
+                 class="object-cover object-center w-full h-full" alt="Wheat Field">
         </div>
 
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </span>
-        </button>
-        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </span>
-        </button>
+        <!-- Slide 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="{{ asset('images/wheaty_port2.png') }}"
+                 class="object-cover object-center w-full h-full" alt="Wheat Export Scene">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="{{ asset('images/wheaty_port3.png') }}"
+                 class="object-cover object-center w-full h-full" alt="Wheat Shipment Port">
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="{{ asset('images/wheaty_port.png') }}"
+                 class="object-cover object-center w-full h-full" alt="Apapa Lagos Port">
+        </div>
+
+        {{-- <!-- Slide 5 (optional placeholder or another image) -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="{{ asset('images/optional_slide.png') }}"
+                 class="object-cover object-center w-full h-full" alt="Milestar Export">
+        </div> --}}
+
     </div>
 
-    <!-- CTA BUTTON centered -->
-    <div class="absolute inset-0 z-10 flex flex-col items-center justify-end pb-16">
-        <a href="#services"
-           data-aos="zoom-in" data-aos-delay="300"
-           class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg hover:bg-yellow-700 rounded-xl hover:scale-105">
-            Explore Our Services
-        </a>
+    <!-- Indicators -->
+    <div class="absolute z-30 flex space-x-3 -translate-x-1/2 rtl:space-x-reverse bottom-5 left-1/2">
+        <button type="button" class="w-3 h-3 rounded-full" data-carousel-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" class="w-3 h-3 rounded-full" data-carousel-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" class="w-3 h-3 rounded-full" data-carousel-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" class="w-3 h-3 rounded-full" data-carousel-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" class="w-3 h-3 rounded-full" data-carousel-slide-to="4" aria-label="Slide 5"></button>
     </div>
 
-    <!-- Pulsating Glow Balls -->
-    <div class="absolute duration-1000 rounded-full bg-fuchsia-400 opacity-70 -bottom-10 -left-10 w-72 h-72 filter blur-2xl animate-pulse"></div>
-    <div class="absolute duration-1000 delay-200 bg-orange-500 rounded-full opacity-100 -top-10 right-10 w-60 h-60 filter blur-2xl animate-pulse"></div>
-    <div class="absolute delay-700 bg-white rounded-full opacity-50 bottom-24 left-1/2 w-52 h-52 filter blur-2xl animate-ping duration-7000"></div>
-</section>
+    <!-- Controls -->
+    <button type="button"
+            class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 6 10">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button"
+            class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 6 10">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+
 
 
 
