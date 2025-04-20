@@ -67,6 +67,30 @@
             @endif
         </header>
 
+        <style>
+            @keyframes sail-around {
+              0% { transform: translate(0%, 0%) rotate(0deg); }
+              25% { transform: translate(90vw, 0%) rotate(90deg); }
+              50% { transform: translate(90vw, 80vh) rotate(180deg); }
+              75% { transform: translate(0%, 80vh) rotate(270deg); }
+              100% { transform: translate(0%, 0%) rotate(360deg); }
+            }
+          
+            .sailing-ship {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 80px;
+              height: 80px;
+              z-index: 50;
+              animation: sail-around 20s linear infinite;
+            }
+          </style>
+          
+          <!-- Replace this with your preferred SVG ship -->
+          <img src="{{ asset('images/ship.svg') }}" alt="Sailing Ship" class="sailing-ship" />
+          
+
         <!--Hero Section-->
         @push('head')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
