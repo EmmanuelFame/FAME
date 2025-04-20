@@ -73,47 +73,37 @@
 @endpush
 
 <section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
-
-    <!-- Flowbite Indicators Carousel -->
-    <div id="hero-carousel" class="relative w-full h-full" data-carousel="static">
+    <div id="hero-carousel" class="relative w-full h-full" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-full overflow-hidden rounded-lg">
-            <!-- Slide 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                <img src="{{ asset('images/wheaty.png') }}" class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 1">
+            <!-- Item 1 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item="active">
+                <img src="{{ asset('images/wheaty.png') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
-            <!-- Slide 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port2.png') }}" class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 2">
+            <!-- Item 2 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('images/wheaty_port2.png') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
-            <!-- Slide 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port3.png') }}" class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 3">
+            <!-- Item 3 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('images/wheaty_port3.png') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
-            <!-- Slide 4 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheaty_port.png') }}" class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 4">
+            <!-- Item 4 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('images/wheaty_port.png') }}" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
         </div>
 
-        <!-- Carousel Indicators -->
-        <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-            <button type="button" class="w-3 h-3 rounded-full bg-white/60" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full bg-white/60" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full bg-white/60" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-            <button type="button" class="w-3 h-3 rounded-full bg-white/60" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        </div>
-
-        <!-- Controls -->
-        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+        <!-- Carousel controls -->
+        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </span>
         </button>
-        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
+        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -121,7 +111,7 @@
         </button>
     </div>
 
-    <!-- CTA BUTTON centered -->
+    <!-- CTA BUTTON -->
     <div class="absolute inset-0 z-10 flex flex-col items-center justify-end pb-16">
         <a href="#services"
            data-aos="zoom-in" data-aos-delay="300"
@@ -130,11 +120,28 @@
         </a>
     </div>
 
-    <!-- Glow Effects -->
+    <!-- Glow Balls -->
     <div class="absolute duration-1000 rounded-full bg-fuchsia-400 opacity-70 -bottom-10 -left-10 w-72 h-72 filter blur-2xl animate-pulse"></div>
     <div class="absolute duration-1000 delay-200 bg-orange-500 rounded-full opacity-100 -top-10 right-10 w-60 h-60 filter blur-2xl animate-pulse"></div>
     <div class="absolute delay-700 bg-white rounded-full opacity-50 bottom-24 left-1/2 w-52 h-52 filter blur-2xl animate-ping duration-7000"></div>
 </section>
+
+<!-- Autoplay Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('[data-carousel-item]');
+        let current = 0;
+
+        function showNextSlide() {
+            items[current].classList.add('hidden');
+            current = (current + 1) % items.length;
+            items[current].classList.remove('hidden');
+        }
+
+        setInterval(showNextSlide, 5000); // Change slide every 5 seconds
+    });
+</script>
+
 
 
 
