@@ -95,11 +95,7 @@
          
 <!-- Ship Container -->
 <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
-    <svg id="ship" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-      <path d="M2 48 L32 12 L62 48 Z" fill="#facc15" stroke="#000" stroke-width="2"/>
-      <rect x="30" y="10" width="4" height="20" fill="#333"/>
-      <circle cx="32" cy="52" r="6" fill="#1e3a8a"/>
-    </svg>
+    <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" style="width: 100%; height: 100%;">
   </div>
     
 
@@ -443,13 +439,16 @@
               const ship = document.getElementById("ship-container");
           
               // Bobbing animation
-              gsap.to("#ship", {
-                y: "-=10",
+              gsap.to("#ship-container", {
+                y: "-=15",
+                rotation: 3,
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut",
                 duration: 2
-              });
+                });
+
+                
           
               // Sailing around the screen
               const screenWidth = window.innerWidth;
