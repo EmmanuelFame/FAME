@@ -71,10 +71,39 @@
 
          
 <!-- Ship Container -->
-<div id="ship-container" class="fixed z-50" style="width: 105px; height: 100px;">
+  <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
+    <!-- Ripple effect -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="ripple-ring"></div>
+    </div>
+    <!-- Ship image -->
     <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" style="width: 100%; height: 100%;">
   </div>
-    
+
+  <style>
+    .ripple-ring {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: rippleAnim 2s infinite ease-in-out;
+  position: absolute;
+  z-index: -1;
+}
+
+@keyframes rippleAnim {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+  </style>
+  
 
         <!--Hero Section-->
         @push('head')
