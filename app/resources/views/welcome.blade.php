@@ -72,33 +72,29 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 @endpush
 
-<section class="relative overflow-hidden h-[85vh]">
+<section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
 
     <!-- Flowbite Carousel -->
     <div id="hero-carousel" class="relative w-full h-full" data-carousel="static">
         <!-- Carousel wrapper -->
-        <div class="relative h-full overflow-hidden rounded-lg">
+        <div class="relative w-full h-full overflow-hidden rounded-lg">
 
             <!-- Slides -->
-            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
                  style="background-image: url('{{ asset('images/wheaty.png') }}');"
-                 data-carousel-item>
-            </div>
+                 data-carousel-item></div>
 
-            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
-                 style="background-image: url('{{ asset('images/wheat_port2.png') }}');"
-                 data-carousel-item>
-            </div>
+            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
+                 style="background-image: url('{{ asset('images/wheaty_port2.png') }}');"
+                 data-carousel-item></div>
 
-            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
-                 style="background-image: url('{{ asset('images/wheat_port3.png') }}');"
-                 data-carousel-item>
-            </div>
+            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
+                 style="background-image: url('{{ asset('images/wheaty_port3.png') }}');"
+                 data-carousel-item></div>
 
-            <div class="hidden h-full duration-700 ease-in-out bg-center bg-cover"
+            <div class="hidden w-full h-full duration-700 ease-in-out bg-center bg-no-repeat bg-cover"
                  style="background-image: url('{{ asset('images/wheaty_port.png') }}');"
-                 data-carousel-item>
-            </div>
+                 data-carousel-item></div>
 
         </div>
 
