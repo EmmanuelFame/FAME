@@ -13,6 +13,7 @@
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     </head>
     <body class="scroll-smooth" >
@@ -91,43 +92,16 @@
           <img src="{{ asset('images/ship.svg') }}" alt="Sailing Ship" class="sailing-ship" />
           
 
-          <!-- Cinematic Ship SVG -->
+         
+<!-- Ship Container -->
 <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
     <svg id="ship" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-        <path d="M2 48 L32 12 L62 48 Z" fill="#facc15" stroke="#000" stroke-width="2"/>
-        <rect x="30" y="10" width="4" height="20" fill="#333"/>
-        <circle cx="32" cy="52" r="6" fill="#1e3a8a"/>
+      <path d="M2 48 L32 12 L62 48 Z" fill="#facc15" stroke="#000" stroke-width="2"/>
+      <rect x="30" y="10" width="4" height="20" fill="#333"/>
+      <circle cx="32" cy="52" r="6" fill="#1e3a8a"/>
     </svg>
-</div>
-
-<script>
-    const ship = document.getElementById("ship-container");
-  
-    // Bobbing motion (up & down loop)
-    gsap.to("#ship", {
-      y: "-=10",
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      duration: 2
-    });
-  
-    // Sailing around the screen edges
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-  
-    gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
-      .to(ship, { x: screenWidth - 100, y: 50, duration: 6, rotation: 5 })
-      .to(ship, { x: screenWidth - 100, y: screenHeight - 100, duration: 6, rotation: 10 })
-      .to(ship, { x: 0, y: screenHeight - 80, duration: 6, rotation: -5 })
-      .to(ship, { x: 0, y: 0, duration: 6, rotation: 0 });
-  
-    // Optional: scale down a bit on smaller screens
-    if (window.innerWidth < 768) {
-      ship.style.transform = "scale(0.75)";
-    }
-  </script>
-  
+  </div>
+    
 
         <!--Hero Section-->
         @push('head')
@@ -464,6 +438,36 @@
             });
         </script>
          
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const ship = document.getElementById("ship-container");
+          
+              // Bobbing animation
+              gsap.to("#ship", {
+                y: "-=10",
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                duration: 2
+              });
+          
+              // Sailing around the screen
+              const screenWidth = window.innerWidth;
+              const screenHeight = window.innerHeight;
+          
+              gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
+                .to(ship, { x: screenWidth - 100, y: 50, duration: 6, rotation: 5 })
+                .to(ship, { x: screenWidth - 100, y: screenHeight - 100, duration: 6, rotation: 10 })
+                .to(ship, { x: 0, y: screenHeight - 80, duration: 6, rotation: -5 })
+                .to(ship, { x: 0, y: 0, duration: 6, rotation: 0 });
+          
+              // Optional: smaller scale on mobile
+              if (screenWidth < 768) {
+                ship.style.transform = "scale(0.75)";
+              }
+            });
+          </script>
+          
+        
     </body>
 </html>
