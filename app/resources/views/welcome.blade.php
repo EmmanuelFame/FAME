@@ -68,33 +68,10 @@
             @endif
         </header>
 
-        <style>
-            @keyframes sail-around {
-              0% { transform: translate(0%, 0%) rotate(0deg); }
-              25% { transform: translate(90vw, 0%) rotate(90deg); }
-              50% { transform: translate(90vw, 80vh) rotate(180deg); }
-              75% { transform: translate(0%, 80vh) rotate(270deg); }
-              100% { transform: translate(0%, 0%) rotate(360deg); }
-            }
-          
-            .sailing-ship {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100px;
-              height: 100px;
-              z-index: 50;
-              animation: sail-around 20s linear infinite;
-            }
-          </style>
-          
-          
-          <img src="{{ asset('images/ship.svg') }}" alt="Sailing Ship" class="sailing-ship" />
-          
 
          
 <!-- Ship Container -->
-<div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
+<div id="ship-container" class="fixed z-50" style="width: 105px; height: 100px;">
     <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" style="width: 100%; height: 100%;">
   </div>
     
