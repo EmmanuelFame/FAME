@@ -84,9 +84,9 @@
     .ripple-ring {
   width: 100%;
   height: 100%;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(234, 233, 233, 0.4);
   border-radius: 50%;
-  animation: rippleAnim 2s infinite ease-in-out;
+  animation: rippleAnim 3s infinite ease-in-out;
   position: absolute;
   z-index: -1;
 }
@@ -94,7 +94,7 @@
 @keyframes rippleAnim {
   0% {
     transform: scale(1);
-    opacity: 0.5;
+    opacity: 0.4;
   }
   100% {
     transform: scale(1.8);
