@@ -116,7 +116,7 @@
         <div class="relative h-full overflow-hidden rounded-lg">
             <!-- Item 1 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item="active">
-                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center h-full">
+                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
             <!-- Item 2 -->
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
