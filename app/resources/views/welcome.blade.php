@@ -130,6 +130,14 @@
             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
                 <img src="{{ asset('images/wheat_broker.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
             </div>
+            <!-- Item 5 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('images/wheat_one.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+            </div>
+            <!-- Item 6 -->
+            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('images/wheat_two.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+            </div>
         </div>
 
         <!-- Carousel controls -->
@@ -158,11 +166,7 @@
         </a>
     </div>
 
-    <!-- Glow Balls -->
-    <div class="absolute duration-1000 rounded-full bg-fuchsia-400 opacity-70 -bottom-10 -left-10 w-72 h-72 filter blur-2xl animate-pulse"></div>
-    <div class="absolute duration-1000 delay-200 bg-orange-500 rounded-full opacity-100 -top-10 right-10 w-60 h-60 filter blur-2xl animate-pulse"></div>
-    <div class="absolute delay-700 bg-blue-700 rounded-full opacity-50 bottom-24 left-1/2 w-52 h-52 filter blur-2xl animate-ping duration-7000"></div>
-</section>
+    </section>
 
 <!-- Autoplay Script -->
 <script>
