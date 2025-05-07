@@ -23,7 +23,7 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="{{ asset('images/milestar.png') }}" class="h-8" alt="Milestar Logo" />
+          <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -406,7 +406,7 @@
     <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="#" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
-                <img src="{{ asset('./images/milestar.png') }}" class="h-8" alt="Milestar Logo" />
+                <img src="{{ asset('./images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
