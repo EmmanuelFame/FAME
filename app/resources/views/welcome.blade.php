@@ -417,13 +417,29 @@
                 </form>
             </div>
             <div class="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl" data-aos="fade-left">
-                <iframe src="https://my.spline.design/untitled-NezNdv32NYdaAfKeYGc8ePeq/"
-                        frameborder="0"
-                        width="100%"
-                        height="100%"
-                        allow="autoplay; fullscreen; xr-spatial-tracking"
-                        allowfullscreen
-                        style="border-radius: 1rem;"></iframe>
+                <canvas id="wheatCanvas"></canvas>
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three';
+  import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('wheatCanvas'), alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  
+  const loader = new GLTFLoader();
+  loader.load('/images/untitled.glb', (gltf) => {
+    scene.add(gltf.scene);
+  });
+
+  camera.position.z = 5;
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
               </div>
             </div>
         </section>
