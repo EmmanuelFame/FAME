@@ -378,7 +378,7 @@
                 });
             </script>
         @endif
-            <div class="max-w-2xl mx-auto text-center">
+            <div class="grid items-center max-w-6xl grid-cols-1 gap-10 mx-auto md:grid-cols-2">
                 <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
                     Get In Touch
                 </h2>
@@ -386,6 +386,7 @@
                     We'd love to connect with you. Whether you're a supplier, buyer, or curious partner — reach out to us today.
                 </p>
         
+                <div data-aos="fade-right">
                 <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6 text-left">
                     @csrf
         
@@ -414,6 +415,16 @@
                         </button>
                     </div>
                 </form>
+            </div>
+            <div class="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl" data-aos="fade-left">
+                <iframe src="https://my.spline.design/untitled-NezNdv32NYdaAfKeYGc8ePeq/"
+                        frameborder="0"
+                        width="100%"
+                        height="100%"
+                        allow="autoplay; fullscreen; xr-spatial-tracking"
+                        allowfullscreen
+                        style="border-radius: 1rem;"></iframe>
+              </div>
             </div>
         </section>
         
