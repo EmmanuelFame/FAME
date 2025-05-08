@@ -112,44 +112,38 @@
 
 <section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
     <div id="hero-carousel" class="relative w-full h-full" data-carousel="slide">
-        <!-- Carousel wrapper -->
-        <div class="relative h-full overflow-hidden rounded-lg">
-            <!-- Item 1 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item="active">
-                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+        <!-- Carousel wrapper (no rounded corners) -->
+        <div class="relative h-full overflow-hidden">
+            <!-- Item 1 (active) -->
+            <div class="h-full transition-opacity duration-700 ease-in-out opacity-100" data-carousel-item="active">
+                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="Wheat field"
+                     class="absolute top-0 left-0 object-cover object-center w-full h-full pointer-events-none">
             </div>
-            <!-- Item 2 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheat_blue.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
+            <!-- Other Items -->
+            @foreach ([
+                'wheat_blue.png',
+                'wheat_marine.png',
+                'wheat_broker.png',
+                'wheat_one.png',
+                'wheat_two.png'
+            ] as $image)
+            <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" aria-hidden="true" data-carousel-item>
+                <img src="{{ asset('images/' . $image) }}" loading="eager" alt="Wheat background"
+                     class="absolute top-0 left-0 object-cover object-center w-full h-full pointer-events-none">
             </div>
-            <!-- Item 3 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheat_marine.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheat_broker.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
-            </div>
-            <!-- Item 5 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheat_one.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
-            </div>
-            <!-- Item 6 -->
-            <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('images/wheat_two.png') }}" loading="eager" alt="..." class="absolute top-0 left-0 object-cover object-center w-full h-full">
-            </div>
+            @endforeach
         </div>
 
         <!-- Carousel controls -->
         <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </span>
         </button>
         <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -161,12 +155,11 @@
     <div class="absolute inset-0 z-10 flex flex-col items-center justify-end pb-16">
         <a href="#services"
            data-aos="zoom-in" data-aos-delay="300"
-           class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg hover:bg-yellow-700 rounded-xl hover:scale-105">
+           class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
             Explore Our Services
         </a>
     </div>
-
-    </section>
+</section>
 
 <!-- Autoplay Script -->
 <script>
@@ -175,14 +168,37 @@
         let current = 0;
 
         function showNextSlide() {
-            items[current].classList.add('hidden');
+            items[current].classList.add('opacity-0', 'hidden');
             current = (current + 1) % items.length;
             items[current].classList.remove('hidden');
+            requestAnimationFrame(() => {
+                items[current].classList.remove('opacity-0');
+                items[current].classList.add('opacity-100');
+            });
         }
 
-        setInterval(showNextSlide, 5000); // Change slide every 5 seconds
+        setInterval(showNextSlide, 7000);
     });
 </script>
+
+
+<!-- Autoplay Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('[data-carousel-item]');
+        let current = 0;
+    
+        function showNextSlide() {
+            items[current].classList.add('opacity-0', 'hidden');
+            current = (current + 1) % items.length;
+            items[current].classList.remove('opacity-0', 'hidden');
+            items[current].classList.add('opacity-100');
+        }
+    
+        setInterval(showNextSlide, 7000);
+    });
+    </script>
+    
 
 
 
