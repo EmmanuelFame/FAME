@@ -353,9 +353,10 @@
        
         
         <!-- CTA section -->
-        <section id="contact" class="px-6 py-20 bg-gradient-to-br from-white via-yellow-50 to-white dark:from-gray-900 dark:to-gray-800 lg:px-20">
+        <section id="contact" class="px-6 py-20 bg-white dark:bg-gray-900 lg:px-20">
             @if(session('success'))
             <script>
+                // Primary confirmation modal
                 Swal.fire({
                     title: 'Message Sent!',
                     text: 'We’ll be in touch shortly.',
@@ -364,6 +365,7 @@
                     timer: 3500,
                     confirmButtonText: 'Okay 👌',
                 }).then(() => {
+                    // Toast comes after user clicks "Okay" or timer ends
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
@@ -375,41 +377,40 @@
                     });
                 });
             </script>
-            @endif
-        
-            <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
-                <h2 class="mb-6 text-4xl font-extrabold text-yellow-700 dark:text-yellow-400">
+        @endif
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
                     Get In Touch
                 </h2>
                 <p class="mb-10 text-gray-600 dark:text-gray-300">
                     We'd love to connect with you. Whether you're a supplier, buyer, or curious partner — reach out to us today.
                 </p>
         
-                <form action="{{ route('contact.submit') }}" method="POST" class="p-8 space-y-6 text-left border border-gray-200 shadow-xl bg-white/60 dark:bg-gray-900/60 backdrop-blur-lg rounded-2xl dark:border-gray-800" data-aos="zoom-in">
+                <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6 text-left">
                     @csrf
         
-                    <div class="relative group">
+                    <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
                         <input type="text" name="name" id="name" required
-                               class="w-full px-5 py-3 mt-1 text-sm text-gray-800 bg-white dark:bg-gray-800 dark:text-white rounded-lg border border-gray-300 dark:border-gray-700 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none focus:scale-[1.02]" />
+                               class="w-full px-4 py-3 border border-gray-300 rounded-md dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-yellow-500 focus:border-yellow-500" />
                     </div>
         
-                    <div class="relative group">
+                    <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                         <input type="email" name="email" id="email" required
-                               class="w-full px-5 py-3 mt-1 text-sm text-gray-800 bg-white dark:bg-gray-800 dark:text-white rounded-lg border border-gray-300 dark:border-gray-700 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none focus:scale-[1.02]" />
+                               class="w-full px-4 py-3 border border-gray-300 rounded-md dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-yellow-500 focus:border-yellow-500" />
                     </div>
         
-                    <div class="relative group">
+                    <div>
                         <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
                         <textarea name="message" id="message" rows="5" required
-                                  class="w-full px-5 py-3 mt-1 text-sm text-gray-800 bg-white dark:bg-gray-800 dark:text-white rounded-lg border border-gray-300 dark:border-gray-700 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none focus:scale-[1.02]"></textarea>
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-md dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-yellow-500 focus:border-yellow-500"></textarea>
                     </div>
         
-                    <div class="pt-4 text-center">
+                    <div class="text-center">
                         <button type="submit"
-                                class="inline-block px-6 py-3 font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-md rounded-xl hover:bg-yellow-700 hover:shadow-lg hover:scale-105">
-                            🚀 Send Message
+                                class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md shadow-md hover:bg-yellow-700">
+                            Send Message
                         </button>
                     </div>
                 </form>
