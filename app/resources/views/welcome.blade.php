@@ -7,7 +7,7 @@
         <title>Milestar Trade</title>
 
         <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('images/milestar_logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/milestar_logo.ico') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
