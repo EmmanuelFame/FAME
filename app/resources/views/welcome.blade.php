@@ -378,7 +378,7 @@
                 });
             </script>
         @endif
-            <div class="grid items-center max-w-6xl grid-cols-1 gap-10 mx-auto md:grid-cols-2">
+            <div class="max-w-2xl mx-auto text-center">
                 <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
                     Get In Touch
                 </h2>
@@ -386,7 +386,6 @@
                     We'd love to connect with you. Whether you're a supplier, buyer, or curious partner — reach out to us today.
                 </p>
         
-                <div data-aos="fade-right">
                 <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6 text-left">
                     @csrf
         
@@ -415,65 +414,6 @@
                         </button>
                     </div>
                 </form>
-            </div>
-            <div class="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl" data-aos="fade-left">
-  
-                <canvas id="wheatCanvas" class="block w-full h-full"></canvas>
-                <script type="module">
-                    import * as THREE from 'https://cdn.skypack.dev/three';
-                    import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';
-                  
-                    const scene = new THREE.Scene();
-                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('wheatCanvas'), alpha: true });
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                  
-                    // Add light
-                    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Bright white light
-                    scene.add(ambientLight);
-                  
-                    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-                    directionalLight.position.set(1, 1, 1);
-                    scene.add(directionalLight);
-                  
-                    // Load GLB and apply basic material
-                    const loader = new GLTFLoader();
-                    loader.load('/images/untitled.glb', (gltf) => {
-                      const model = gltf.scene;
-                  
-                      // Optional: scale and position
-                      model.scale.set(2, 2, 2);
-                      model.position.set(0, -1, 0);
-                  
-                      // Add a basic yellow material to all meshes
-                      model.traverse((child) => {
-                        if (child.isMesh) {
-                          child.material = new THREE.MeshStandardMaterial({
-                            color: 0xfacc15, // Tailwind's yellow-400
-                            roughness: 0.5,
-                            metalness: 0.3,
-                          });
-                        }
-                      });
-                  
-                      scene.add(model);
-                  
-                      function animate() {
-                        requestAnimationFrame(animate);
-                        model.rotation.y += 0.01;
-                        renderer.render(scene, camera);
-                      }
-                  
-                      animate();
-                    }, undefined, (err) => {
-                      console.error('Failed to load GLB:', err);
-                    });
-                  
-                    camera.position.z = 5;
-                  </script>
-                  
-
-              </div>
             </div>
         </section>
         
