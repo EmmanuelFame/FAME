@@ -417,27 +417,76 @@
                 </form>
             </div>
             <div class="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl" data-aos="fade-left">
-                <canvas id="wheatCanvas"></canvas>
+  
+                <canvas id="wheatCanvas" class="block w-full h-full"></canvas>
 <script type="module">
   import * as THREE from 'https://cdn.skypack.dev/three';
   import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('wheatCanvas'), alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('wheatCanvas'),
+    alpha: true,
+    antialias: true
+  });
+  renderer.setSize(500, 500); // Adjust to your desired size
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffe58a, 1);
+  directionalLight.position.set(0, 3, 5);
+  scene.add(directionalLight);
+
+  // Load GLB Model
   const loader = new GLTFLoader();
   loader.load('/images/untitled.glb', (gltf) => {
-    scene.add(gltf.scene);
+    const model = gltf.scene;
+
+    // Optional: apply a golden material if geometry has no texture/colors
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color: 0xf5c542,
+          metalness: 0.6,
+          roughness: 0.4
+        });
+      }
+    });
+
+    model.scale.set(2, 2, 2); // Scale up if needed
+    model.rotation.y = Math.PI / 4;
+
+    scene.add(model);
+
+    // Animation
+    function animate() {
+      requestAnimationFrame(animate);
+      model.rotation.y += 0.005;
+      renderer.render(scene, camera);
+    }
+
+    animate();
   });
 
-  camera.position.z = 5;
-  function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+  // Responsive resizing
+  function resizeCanvas() {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height, false);
   }
-  animate();
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
 </script>
 
               </div>
