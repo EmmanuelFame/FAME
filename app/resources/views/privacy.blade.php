@@ -1,38 +1,38 @@
 @extends('layouts.app')
 
-@section('title', 'Privacy Policy')
+@section('title', 'Terms & Conditions')
 
 @section('content')
 <div class="max-w-4xl px-4 py-10 mx-auto">
-    <h1 class="mb-6 text-3xl font-bold">Privacy Policy</h1>
+    <h1 class="mb-6 text-3xl font-bold">Terms & Conditions</h1>
 
     <p class="mb-4">
-        At Milestar Trade and Export Limited, we are committed to protecting the privacy and confidentiality of our partners and website users.
+        These Terms & Conditions govern the use of the services provided by Milestar Trade and Export Limited (“Milestar”), a Nigerian Limited Liability Company operating as a wheat brokerage firm.
     </p>
 
-    <h2 class="mt-6 mb-2 text-xl font-semibold">1. Information We Collect</h2>
+    <h2 class="mt-6 mb-2 text-xl font-semibold">1. Services</h2>
     <p class="mb-4">
-        We collect personal information (e.g., name, email, company details) strictly for the purpose of facilitating wheat brokerage transactions and communication.
+        Milestar facilitates wheat trade between Russian suppliers and Nigerian buyers. We act solely as an intermediary and are not a direct supplier or buyer of wheat.
     </p>
 
-    <h2 class="mt-6 mb-2 text-xl font-semibold">2. Use of Information</h2>
+    <h2 class="mt-6 mb-2 text-xl font-semibold">2. Commission Model</h2>
     <p class="mb-4">
-        Information is used to enable trade facilitation, respond to inquiries, and provide support. We do not sell or share personal data with third parties without consent.
+        Milestar earns a fixed commission per ton of wheat successfully traded. This model ensures transparency and alignment of interests with both suppliers and buyers.
     </p>
 
-    <h2 class="mt-6 mb-2 text-xl font-semibold">3. Security</h2>
+    <h2 class="mt-6 mb-2 text-xl font-semibold">3. Liability</h2>
     <p class="mb-4">
-        Milestar implements industry-standard security practices to protect your data from unauthorized access.
+        Milestar is not responsible for any disputes between buyers and suppliers but will support resolution efforts in good faith.
     </p>
 
-    <h2 class="mt-6 mb-2 text-xl font-semibold">4. Your Rights</h2>
+    <h2 class="mt-6 mb-2 text-xl font-semibold">4. Compliance</h2>
     <p class="mb-4">
-        You have the right to request access, correction, or deletion of your data by contacting us.
+        All users of our service must comply with Nigerian and international trade laws. Milestar reserves the right to refuse service to parties that breach compliance standards.
     </p>
 
-    <h2 class="mt-6 mb-2 text-xl font-semibold">5. Contact</h2>
+    <h2 class="mt-6 mb-2 text-xl font-semibold">5. Updates</h2>
     <p>
-        For any privacy-related concerns, please email us at <a href="mailto:info@milestar.com" class="text-blue-600 underline">info@milestar.com</a>.
+        These terms may be updated periodically. Continued use of our services constitutes acceptance of the revised terms.
     </p>
 </div>
 @endsection
