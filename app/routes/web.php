@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/terms', function () {
     return view('terms');
-});
+})->name('terms'); // Adding the name to this route
+
 Route::get('/privacy', function () {
     return view('privacy');
-});
+})->name('privacy'); // Adding the name to this route
 
 Route::get('/dashboard', function () {
     return view('dashboard');
