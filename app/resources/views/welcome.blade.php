@@ -435,8 +435,9 @@
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li><a href="{{ url('/about') }}" class="hover:underline me-4 md:me-6">About</a></li>
                 <li><a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline me-4 md:me-6">Licensing</a></li>
-                <li><a href="{{ route('contact') }}" class="hover:underline">Contact</a></li>
+                <li><a href="{{ url('/contact') }}" class="hover:underline me-4 md:me-6">Contact Us</a></li>
+                <li><a href="{{ route('terms') }}" class="hover:underline me-4 md:me-6">Terms and Condition</a></li>
+                
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />

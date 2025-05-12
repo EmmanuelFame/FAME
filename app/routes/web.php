@@ -23,8 +23,7 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 
 Route::view('/terms', 'terms')->name('terms');
 Route::view('/privacy', 'privacy')->name('privacy');
-Route::view('/contact', 'contact')->name('contact');
-Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
 
 
 require __DIR__.'/auth.php';
