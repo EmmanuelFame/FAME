@@ -26,4 +26,5 @@ Route::view('/privacy', 'privacy')->name('privacy');
 
 
 
+
 require __DIR__.'/auth.php';
