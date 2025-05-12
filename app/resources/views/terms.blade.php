@@ -8,7 +8,7 @@
 
     <div class="max-w-4xl px-4 py-10 mx-auto text-gray-900 bg-white rounded shadow">
         <p class="mb-4">
-            These Terms & Conditions govern the use of the services provided by Milestar Trade and Export Limited (“Milestar”), a Nigerian Limited Liability Company operating as a wheat brokerage firm.
+            These Terms & Conditions govern the use of the services provided by Milestar Trade and Export Limited (“Milestar”), a Nigerian Limited Liability Company operating as an agricultural crops brokerage and trade firm.
         </p>
 
         <h3 class="mt-6 mb-2 text-lg font-semibold">1. Services</h3>
