@@ -19,6 +19,53 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     </head>
+    <style>
+    .loader-container {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background-color: #0c0603;
+        display: grid;
+        place-content: center;
+        transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
+    }
+
+    .loader {
+        width: 4rem;
+        height: 4rem;
+        border: .4rem solid #3b82f6;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: .8s ease infinite alternate spinner;
+    }
+
+    .loader-container.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+    #page-content {
+        opacity: 0;
+        transform: translate3d(0, -1rem, 0);
+        transition: opacity .6s ease-in-out, transform .6s ease-in-out;
+    }
+
+    #page-content.visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+    @keyframes spinner {
+        /* default values
+         from{
+            transform: rotate(0deg) scale(1);
+        } */
+        from{
+            transform: rotate(1turn) scale(1.2);
+        }
+    }
+
+</style>
     <body class="scroll-smooth" >
         <header >        
             @if (Route::has('login'))
@@ -489,6 +536,15 @@
             });
           </script>
           
+          <script>
+        const loaderContainer = document.querySelector('.loader-container');
+        const pageContent = document.querySelector('#page-content');
+
+        window.addEventListener('load', () => {
+            loaderContainer.classList.add('hidden');
+            pageContent.classList.add('visible');
+        })
+    </script>
         
     </body>
 </html>
