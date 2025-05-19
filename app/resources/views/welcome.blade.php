@@ -1,262 +1,201 @@
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milestar Trade</title>
 
-        <title>Milestar Trade</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/milestar_logo.ico') }}">
 
-        <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('images/milestar_logo.ico') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-        
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    </head>
+    <!-- External Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
-    .loader-container {
-        position: fixed;
-        inset: 0;
-        z-index: 999;
-        background-color: #0c0603;
-        display: grid;
-        place-content: center;
-        transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
-    }
-
-    .loader {
-        width: 4rem;
-        height: 4rem;
-        border: .4rem solid #3b82f6;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        border-radius: 50%;
-        animation: .8s ease infinite alternate spinner;
-    }
-
-    .loader-container.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-    #page-content {
-        opacity: 0;
-        transform: translate3d(0, -1rem, 0);
-        transition: opacity .6s ease-in-out, transform .6s ease-in-out;
-    }
-
-    #page-content.visible {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-
-    @keyframes spinner {
-        /* default values
-         from{
-            transform: rotate(0deg) scale(1);
-        } */
-        from{
-            transform: rotate(1turn) scale(1.2);
+        .loader-container {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background-color: #0c0603;
+            display: grid;
+            place-content: center;
+            transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
         }
-    }
 
-</style>
-    <body class="scroll-smooth" >
-        <div class="loader-container">
+        .loader {
+            width: 4rem;
+            height: 4rem;
+            border: .4rem solid #3b82f6;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner .8s ease infinite alternate;
+        }
+
+        @keyframes spinner {
+            from { transform: rotate(1turn) scale(1.2); }
+        }
+
+        .loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #page-content {
+            opacity: 0;
+            transform: translateY(-1rem);
+            transition: opacity .6s ease-in-out, transform .6s ease-in-out;
+        }
+
+        #page-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ripple-ring {
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(234, 233, 233, 0.4);
+            border-radius: 50%;
+            animation: rippleAnim 3s infinite ease-in-out;
+            position: absolute;
+            z-index: -1;
+        }
+
+        @keyframes rippleAnim {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="scroll-smooth">
+
+    <!-- Page Loader -->
+    <div class="loader-container" id="loader">
         <div class="loader"></div>
     </div>
 
+    <!-- Main Content -->
     <div id="page-content">
-        <header >        
-            @if (Route::has('login'))
-
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
-      </a>
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            @auth
-
-          <li>
-            <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"  aria-current="page">Dashboard</a>
-
-          </li>
-
-          @else
-
-          <li>
-            <a href="{{ route('login') }}" class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
-          </li>
-
-          
-
-            @if (Route::has('register'))
-
-          <li>
-            <a href="{{ route('register') }}" class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Register</a>
-          </li>
-
-          
-            @endif
-
-
-        </ul>
-      </div>
-    </div>
-  </nav>               
-                    @endauth
-  
-            @endif
+        <!-- Navbar -->
+        <header>
+            <nav class="bg-white border-gray-200 dark:bg-gray-900">
+                <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+                    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+                        <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
+                    </a>
+                    <button data-collapse-toggle="navbar-default" type="button"
+                            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                            aria-controls="navbar-default" aria-expanded="false">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M1 1h15M1 7h15M1 13h15"/>
+                        </svg>
+                    </button>
+                    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                        <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            @auth
+                                <li>
+                                    <a href="{{ url('/dashboard') }}"
+                                       class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ route('login') }}"
+                                       class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                        Login
+                                    </a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li>
+                                        <a href="{{ route('register') }}"
+                                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                            Register
+                                        </a>
+                                    </li>
+                                @endif
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </header>
 
-
-         
-<!-- Ship Container -->
-  <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
-    <!-- Ripple effect -->
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="ripple-ring"></div>
-    </div>
-    <!-- Ship image -->
-    <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" style="width: 100%; height: 100%;">
-  </div>
-
-  <style>
-    .ripple-ring {
-  width: 100%;
-  height: 100%;
-  border: 2px solid rgba(234, 233, 233, 0.4);
-  border-radius: 50%;
-  animation: rippleAnim 3s infinite ease-in-out;
-  position: absolute;
-  z-index: -1;
-}
-
-@keyframes rippleAnim {
-  0% {
-    transform: scale(1);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-  </style>
-  
-
-        <!--Hero Section-->
-        @push('head')
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-@endpush
-
-<section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
-    <!-- Hero Carousel -->
-    <div id="hero-carousel" class="relative w-full h-full" data-carousel="slide">
-        <!-- Optional Gradient Overlay -->
-        <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
-
-        <!-- Carousel wrapper -->
-        <div class="relative h-full overflow-hidden">
-            <!-- Active Item -->
-            <div class="h-full transition-opacity duration-700 ease-in-out opacity-100" data-carousel-item="active">
-                <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="Wheat field"
-                     class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transform transition-transform duration-[5000ms] scale-100 hover:scale-105">
+        <!-- Floating Ship Icon -->
+        <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="ripple-ring"></div>
             </div>
-
-            <!-- Other Items -->
-            @foreach ([
-                'wheat_blue.png',
-                'wheat_marine.png',
-                'wheat_broker.png',
-                'wheat_one.png',
-                'wheat_two.png'
-            ] as $image)
-            <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" data-carousel-item>
-                <img src="{{ asset('images/' . $image) }}" loading="eager" alt="Wheat background"
-                     class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transform transition-transform duration-[5000ms] scale-100 hover:scale-105">
-            </div>
-            @endforeach
+            <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" class="w-full h-full">
         </div>
 
-        <!-- Carousel Controls -->
-        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </span>
-        </button>
-        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </span>
-        </button>
-    </div>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
+            <div id="hero-carousel" class="relative w-full h-full" data-carousel="slide">
+                <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="relative h-full overflow-hidden">
+                    <div class="h-full transition-opacity duration-700 ease-in-out opacity-100" data-carousel-item="active">
+                        <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="Wheat field"
+                             class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-[5000ms] scale-100 hover:scale-105">
+                    </div>
+                    @foreach (['wheat_blue.png', 'wheat_marine.png', 'wheat_broker.png', 'wheat_one.png', 'wheat_two.png'] as $image)
+                        <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" data-carousel-item>
+                            <img src="{{ asset('images/' . $image) }}" loading="eager" alt="Wheat"
+                                 class="absolute top-0 left-0 w-full h-full object-cover object-center transition-transform duration-[5000ms] scale-100 hover:scale-105">
+                        </div>
+                    @endforeach
+                </div>
 
-    <!-- CTA Button -->
-    <div class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16">
-        <a href="#services"
-           data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
-           class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
-            Explore Our Services
-        </a>
-    </div>
-</section>
+                <!-- Carousel Controls -->
+                <button type="button" data-carousel-prev class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </span>
+                </button>
+                <button type="button" data-carousel-next class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
 
+            <!-- Call to Action -->
+            <div class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16">
+                <a href="#services" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
+                   class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
+                    Explore Our Services
+                </a>
+            </div>
+        </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('[data-carousel-item]');
-        let current = 0;
+        <!-- Services section and others go here -->
 
-        function showNextSlide() {
-            items[current].classList.remove('opacity-100');
-            items[current].classList.add('opacity-0');
-            setTimeout(() => {
-                items[current].classList.add('hidden');
-                current = (current + 1) % items.length;
-                items[current].classList.remove('hidden');
-
-                requestAnimationFrame(() => {
-                    items[current].classList.remove('opacity-0');
-                    items[current].classList.add('opacity-100');
-                });
-            }, 700);
-        }
-
-        setInterval(showNextSlide, 7000);
-    });
-</script>
-
-
-
-
-
-
-@push('scripts')
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ once: true, duration: 900 });</script>
-@endpush
-
-        
          <!-- About section -->
          <section id="about" class="px-6 py-20 bg-white dark:bg-gray-900 lg:px-20">
             <div class="max-w-5xl p-3 mx-auto text-center">
@@ -332,11 +271,7 @@
             </div>
         </section>
         
-        
-        
-        
-        
-        
+
         <!--How it works section-->
         @push('head')
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -395,10 +330,7 @@
         </div>
     </section>
     
-   
-        
-       
-        
+
         <!-- CTA section -->
         <section id="contact" class="px-6 py-20 bg-white dark:bg-gray-900 lg:px-20">
             @if(session('success'))
@@ -463,12 +395,9 @@
                 </form>
             </div>
         </section>
-        
+    </div>
 
-
-
-        
-        <footer class="bg-white shadow-sm dark:bg-gray-900">
+      <footer class="bg-white shadow-sm dark:bg-gray-900">
     <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="{{ url('/') }}" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
@@ -491,7 +420,7 @@
 
 
         
-    </div> 
+    
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init({
@@ -542,6 +471,42 @@
             pageContent.classList.add('visible');
         })
     </script>
-        
-    </body>
+    <!-- JavaScript for Carousel + Loader -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loader fade out
+            const loader = document.getElementById('loader');
+            const pageContent = document.getElementById('page-content');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                pageContent.classList.add('visible');
+            }, 1000);
+
+            // Carousel logic
+            const items = document.querySelectorAll('[data-carousel-item]');
+            let current = 0;
+
+            function showNextSlide() {
+                items[current].classList.remove('opacity-100');
+                items[current].classList.add('opacity-0');
+                setTimeout(() => {
+                    items[current].classList.add('hidden');
+                    current = (current + 1) % items.length;
+                    items[current].classList.remove('hidden');
+                    requestAnimationFrame(() => {
+                        items[current].classList.remove('opacity-0');
+                        items[current].classList.add('opacity-100');
+                    });
+                }, 700);
+            }
+
+            setInterval(showNextSlide, 7000);
+        });
+    </script>
+
+    <!-- AOS Init -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ once: true });</script>
+</body>
 </html>
