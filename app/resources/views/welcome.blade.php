@@ -166,14 +166,19 @@
 @endpush
 
 <section class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
+    <!-- Hero Carousel -->
     <div id="hero-carousel" class="relative w-full h-full" data-carousel="slide">
-        <!-- Carousel wrapper (no rounded corners) -->
+        <!-- Optional Gradient Overlay -->
+        <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
+
+        <!-- Carousel wrapper -->
         <div class="relative h-full overflow-hidden">
-            <!-- Item 1 (active) -->
+            <!-- Active Item -->
             <div class="h-full transition-opacity duration-700 ease-in-out opacity-100" data-carousel-item="active">
                 <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="Wheat field"
-                     class="absolute top-0 left-0 object-cover object-center w-full h-full pointer-events-none">
+                     class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transform transition-transform duration-[5000ms] scale-100 hover:scale-105">
             </div>
+
             <!-- Other Items -->
             @foreach ([
                 'wheat_blue.png',
@@ -182,14 +187,14 @@
                 'wheat_one.png',
                 'wheat_two.png'
             ] as $image)
-            <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" aria-hidden="true" data-carousel-item>
+            <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" data-carousel-item>
                 <img src="{{ asset('images/' . $image) }}" loading="eager" alt="Wheat background"
-                     class="absolute top-0 left-0 object-cover object-center w-full h-full pointer-events-none">
+                     class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transform transition-transform duration-[5000ms] scale-100 hover:scale-105">
             </div>
             @endforeach
         </div>
 
-        <!-- Carousel controls -->
+        <!-- Carousel Controls -->
         <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group" data-carousel-prev>
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,54 +211,41 @@
         </button>
     </div>
 
-    <!-- CTA BUTTON -->
-    <div class="absolute inset-0 z-10 flex flex-col items-center justify-end pb-16">
+    <!-- CTA Button -->
+    <div class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16">
         <a href="#services"
-           data-aos="zoom-in" data-aos-delay="300"
+           data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
            class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
             Explore Our Services
         </a>
     </div>
 </section>
 
-<!-- Autoplay Script -->
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const items = document.querySelectorAll('[data-carousel-item]');
         let current = 0;
 
         function showNextSlide() {
-            items[current].classList.add('opacity-0', 'hidden');
-            current = (current + 1) % items.length;
-            items[current].classList.remove('hidden');
-            requestAnimationFrame(() => {
-                items[current].classList.remove('opacity-0');
-                items[current].classList.add('opacity-100');
-            });
+            items[current].classList.remove('opacity-100');
+            items[current].classList.add('opacity-0');
+            setTimeout(() => {
+                items[current].classList.add('hidden');
+                current = (current + 1) % items.length;
+                items[current].classList.remove('hidden');
+
+                requestAnimationFrame(() => {
+                    items[current].classList.remove('opacity-0');
+                    items[current].classList.add('opacity-100');
+                });
+            }, 700);
         }
 
         setInterval(showNextSlide, 7000);
     });
 </script>
 
-
-<!-- Autoplay Script -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('[data-carousel-item]');
-        let current = 0;
-    
-        function showNextSlide() {
-            items[current].classList.add('opacity-0', 'hidden');
-            current = (current + 1) % items.length;
-            items[current].classList.remove('opacity-0', 'hidden');
-            items[current].classList.add('opacity-100');
-        }
-    
-        setInterval(showNextSlide, 7000);
-    });
-    </script>
-    
 
 
 
