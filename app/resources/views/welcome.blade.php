@@ -157,7 +157,7 @@
                         <img src="{{ asset('images/wheaty.webp') }}" loading="eager" alt="Wheat field"
                              class="absolute top-0 left-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-[5000ms] scale-100 hover:scale-105">
                     </div>
-                    @foreach (['wheat_blue.png', 'wheat_marine.png', 'wheat_broker.png', 'wheat_one.png', 'wheat_two.png'] as $image)
+                    @foreach (['wheat_blue.webp', 'wheat_marine.webp', 'wheat_broker.webp', 'wheat_one.webp', 'wheat_two.webp'] as $image)
                         <div class="hidden h-full transition-opacity duration-700 ease-in-out opacity-0" data-carousel-item>
                             <img src="{{ asset('images/' . $image) }}" loading="eager" alt="Wheat"
                                  class="absolute top-0 left-0 w-full h-full object-cover object-center transition-transform duration-[5000ms] scale-100 hover:scale-105">
