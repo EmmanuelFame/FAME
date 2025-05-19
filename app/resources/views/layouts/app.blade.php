@@ -65,6 +65,11 @@
 
 </style>
     <body class="font-sans antialiased">
+        <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div id="page-content">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
@@ -82,6 +87,7 @@
                 {{ $slot }}
             </main>
         </div>
+    </div>
         <script>
         const loaderContainer = document.querySelector('.loader-container');
         const pageContent = document.querySelector('#page-content');
