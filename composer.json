@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "laravel-lang/publisher": "16.5"
+    }
+}
