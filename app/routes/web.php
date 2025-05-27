@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 
+Route::post('/locale', [App\Http\Controllers\LocaleController::class, 'change'])->name('locale.change');
 
 
 
