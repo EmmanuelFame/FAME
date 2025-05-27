@@ -68,11 +68,12 @@
         <div class="loader-container">
         <div class="loader"></div>
     </div>
-
+    
     <div id="page-content">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
-
+            {{-- resources/views/layouts/app.blade.php --}}
+<p class="text-sm text-gray-400">Locale: {{ app()->getLocale() }}</p>
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white shadow dark:bg-gray-800">
