@@ -137,7 +137,7 @@
 
                 {{-- Language Switcher --}}
                 <li>
-                    <form action="{{ route('locale.change') }}" method="POST" class="ml-4">
+                    <form action="{{ route('locale.change') }}" method="POST" onsubmit="document.getElementById('loader').classList.add('hidden')" class="ml-4">
                         @csrf
                         <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
                             <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>

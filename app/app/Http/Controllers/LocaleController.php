@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Session;
 class LocaleController extends Controller
 {
     public function change(Request $request)
-    {
-        $locale = $request->input('locale');
-        if (in_array($locale, ['en', 'ru'])) {
-            Session::put('locale', $locale);
-        }
-        return redirect()->back();
+{
+    $locale = $request->input('locale');
+    if (in_array($locale, ['en', 'ru'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
     }
+    return redirect()->back();
+}
+
 }
