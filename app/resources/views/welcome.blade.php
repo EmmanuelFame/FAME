@@ -95,7 +95,7 @@
     <div id="page-content">
         <!-- Navbar -->
         <header>
-            <nav class="bg-white border-gray-200 dark:bg-gray-900">
+     <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
@@ -115,21 +115,21 @@
                     <li>
                         <a href="{{ url('/dashboard') }}"
                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                            Dashboard
+                            {{ __('messages.dashboard') }}
                         </a>
                     </li>
                 @else
                     <li>
                         <a href="{{ route('login') }}"
                            class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            Login
+                            {{ __('messages.login') }}
                         </a>
                     </li>
                     @if (Route::has('register'))
                         <li>
                             <a href="{{ route('register') }}"
                                class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                Register
+                                {{ __('messages.register') }}
                             </a>
                         </li>
                     @endif
@@ -149,6 +149,7 @@
         </div>
     </div>
 </nav>
+
 
         </header>
 
@@ -442,16 +443,19 @@
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li><a href="#about" class="hover:underline me-4 md:me-6">About</a></li>
-                <li><a href="#contact" class="hover:underline me-4 md:me-6">Contact Us</a></li>
-                <li><a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">Privacy Policy</a></li>
-                <li><a href="{{ route('terms') }}" class="hover:underline me-4 md:me-6">Terms and Condition</a></li>
+                <li><a href="#about" class="hover:underline me-4 md:me-6">{{ __('messages.about') }}</a></li>
+                <li><a href="#contact" class="hover:underline me-4 md:me-6">{{ __('messages.contact') }}</a></li>
+                <li><a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">{{ __('messages.privacy') }}</a></li>
+                <li><a href="{{ route('terms') }}" class="hover:underline me-4 md:me-6">{{ __('messages.terms') }}</a></li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="{{ url('/') }}" class="hover:underline">Milestar™</a>. All Rights Reserved.</span>
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            © 2025 <a href="{{ url('/') }}" class="hover:underline">Milestar™</a>. {{ __('messages.rights') }}
+        </span>
     </div>
 </footer>
+
 
 
 
