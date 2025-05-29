@@ -137,8 +137,13 @@
 
                 {{-- Language Switcher --}}
                 <li>
-                    <a href="{{ route('lang.switch', ['locale' => 'en']) }}">English</a>
-<a href="{{ route('lang.switch', ['locale' => 'ru']) }}">Русский</a>
+                    <form action="{{ route('locale.change') }}" method="POST" class="hidden ml-4 sm:block">
+    @csrf
+    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
+        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
+    </select>
+</form>
 
                 </li>
             </ul>
