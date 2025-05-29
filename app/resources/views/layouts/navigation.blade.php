@@ -24,22 +24,24 @@
                 @php
     use Illuminate\Support\Str;
 
-    // List of routes that have both translations
+    // Pages that have both translations
     $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
 
     $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
     $isRu = request()->is('ru') || request()->is('ru/*');
 
-    // Get the base route name, e.g., 'dashboard' from 'ru/dashboard'
-    $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
+    // Special case: if on /ru exactly, treat as root
+    if ($currentPath === 'ru') {
+        $normalizedPath = '';
+    } else {
+        $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
+    }
 
-    // Check if the toggle should show
     $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
 
-    // Build the target URL for toggle
     $targetUrl = $isRu
-        ? url($normalizedPath ?: '/') // from /ru/privacy -> /privacy (or /)
-        : url('ru/' . ($currentPath ?: '')); // from /privacy -> /ru/privacy (or /ru)
+        ? url($normalizedPath ?: '/')            // /ru → /
+        : url('ru' . ($currentPath ? '/' . $currentPath : '')); // / → /ru
 @endphp
 
 @if ($shouldShowToggle)
