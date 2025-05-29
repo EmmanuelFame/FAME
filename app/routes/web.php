@@ -26,16 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 
 Route::post('/locale', [App\Http\Controllers\LocaleController::class, 'change'])->name('locale.change');
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ru'])) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('lang.switch');
 
 
 
