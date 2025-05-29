@@ -21,10 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
-        body, html {
-  overflow: hidden; /* prevents scrollbars from appearing */
-}
-
+        
         .loader-container {
             position: fixed;
             inset: 0;
