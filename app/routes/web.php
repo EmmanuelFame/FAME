@@ -32,3 +32,6 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ru']], functi
     Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 });
 
+// In routes/web.php
+require __DIR__.'/auth.php'; 
+
