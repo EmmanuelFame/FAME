@@ -21,10 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
-        body {
-  overflow: hidden;
-}
-
+        
         .loader-container {
             position: fixed;
             inset: 0;
@@ -472,37 +469,29 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ship = document.getElementById("ship-container");
 
-  // Define your safe animation box
-  const floatBox = {
-    xMin: window.innerWidth - 200, // 200px from left edge (near bottom-right)
-    xMax: window.innerWidth - 100, // stays within 100px horizontally
-    yMin: window.innerHeight - 200,
-    yMax: window.innerHeight - 100
-  };
+  // Get center of screen
+  const centerX = window.innerWidth / 2 - 40; // 40 = half of ship width
+  const centerY = window.innerHeight / 2 - 40;
 
-  // Bobbing animation
+  // Bobbing effect
   gsap.to(ship, {
-    y: "-=10",
+    y: "-=5",
     rotation: 3,
     repeat: -1,
     yoyo: true,
     ease: "sine.inOut",
-    duration: 2
+    duration: 1.5
   });
 
-  // Constrained sailing animation (small loop)
-  gsap.timeline({ repeat: -1, defaults: { ease: "sine.inOut", duration: 4 } })
-    .to(ship, { x: floatBox.xMax, y: floatBox.yMin, rotation: 5 })
-    .to(ship, { x: floatBox.xMax, y: floatBox.yMax, rotation: 10 })
-    .to(ship, { x: floatBox.xMin, y: floatBox.yMax, rotation: -5 })
-    .to(ship, { x: floatBox.xMin, y: floatBox.yMin, rotation: 0 });
-
-  // Optional: smaller on mobile
-  if (window.innerWidth < 768) {
-    ship.style.transform = "scale(0.75)";
-  }
+  // Centered gentle floating loop
+  gsap.timeline({ repeat: -1, defaults: { ease: "sine.inOut", duration: 3 } })
+    .to(ship, { x: centerX + 30, y: centerY - 10, rotation: 5 })
+    .to(ship, { x: centerX + 30, y: centerY + 30, rotation: 10 })
+    .to(ship, { x: centerX - 30, y: centerY + 30, rotation: -5 })
+    .to(ship, { x: centerX - 30, y: centerY - 10, rotation: 0 });
 });
 </script>
+
 
           
           <script>
