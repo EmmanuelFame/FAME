@@ -26,7 +26,22 @@
 
 @if ($shouldShowToggle)
     <a href="{{ $targetUrl }}"
-       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-        {{ $isRu ? '🇳🇬' : '🇷🇺' }}
+       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 flag-emoji">
+        {!! $isRu ? '&#127475;&#127468;' : '&#127479;&#127482;' !!}
     </a>
 @endif
+<style>
+    .flag-emoji {
+    font-family: 
+        'Apple Color Emoji', 
+        'Segoe UI Emoji', 
+        'Noto Color Emoji', 
+        'EmojiOne Color', 
+        'Twemoji Mozilla', 
+        sans-serif;
+    font-size: 1.5rem; /* Adjust size as needed */
+    line-height: 1;
+}
+
+</style>
+

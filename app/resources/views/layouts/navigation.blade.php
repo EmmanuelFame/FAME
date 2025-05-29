@@ -20,6 +20,21 @@
         : url('ru' . ($currentPath ? '/' . $currentPath : ''));
 @endphp
 
+<style>
+.flag-emoji {
+    font-family: 
+        'Apple Color Emoji', 
+        'Segoe UI Emoji', 
+        'Noto Color Emoji', 
+        'EmojiOne Color', 
+        'Twemoji Mozilla', 
+        sans-serif;
+    font-size: 1.5rem; /* Adjust size as needed */
+    line-height: 1;
+}
+
+</style>
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -43,12 +58,13 @@
             <!-- Right: Auth + Language -->
             <div class="hidden sm:flex sm:items-center sm:space-x-4">
                 <!-- Language Switcher -->
-                @if ($shouldShowToggle)
-                    <a href="{{ $targetUrl }}"
-                        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-                    </a>
-                @endif
+               @if ($shouldShowToggle)
+    <a href="{{ $targetUrl }}"
+       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 flag-emoji">
+        {!! $isRu ? '&#127475;&#127468;' : '&#127479;&#127482;' !!}
+    </a>
+@endif
+
 
                 <!-- Auth Dropdown / Links -->
                 @auth
@@ -111,13 +127,14 @@
 
         <!-- Mobile Language -->
         @if ($shouldShowToggle)
-        <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-600">
-            <a href="{{ $targetUrl }}"
-               class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                {{ $isRu ? '🇳🇬' : '🇷🇺' }}
-            </a>
-        </div>
-        @endif
+    <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-600">
+        <a href="{{ $targetUrl }}"
+           class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 flag-emoji">
+            {!! $isRu ? '&#127475;&#127468;' : '&#127479;&#127482;' !!}
+        </a>
+    </div>
+@endif
+
 
         <!-- Mobile Auth Links -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
