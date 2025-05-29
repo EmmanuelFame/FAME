@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Milestar Trade</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milestar Trade</title>
 
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="{{ asset('images/milestar_logo.ico') }}">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/milestar_logo.ico') }}">
 
-<!-- Шрифты -->
-<link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-<!-- Стили и скрипты -->
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<!-- Внешние библиотеки -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- External Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-<style>
-/* .loader-container {
-position: fixed;
-inset: 0;
-z-index: 999;
-background-color: #0c0603;
-display: grid;
-place-content: center;
-transition: opacity .4s ease-in-out, visible .4s ease-in-out;
-} */
+    <style>
+        .loader-container {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background-color: #0c0603;
+            display: grid;
+            place-content: center;
+            transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
+        }
 
-.loader {
-width: 4rem;
-height: 4rem;
-border: .4rem solid #3b82f6;
-border-left-color: transparent;
-border-right-color: transparent;
-border-radius: 50%;
-animation: spinner .8s ease infinite alternating;
-}
+        .loader {
+            width: 4rem;
+            height: 4rem;
+            border: .4rem solid #3b82f6;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner .8s ease infinite alternate;
+        }
 
-@keyframes spinner {
-from { transform: rotate(1turn) scale(1.2); }
-}
+        @keyframes spinner {
+            from { transform: rotate(1turn) scale(1.2); }
+        }
 
-.loader-container.hidden {
-opacity: 0;
-visible: hidden;
-}
+        .loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-#page-content {
-opacity: 0;
-transform: translateY(-1rem);
-transition: opacity .6s ease-in-out, transform .6s ease-in-out;
-}
+        #page-content {
+            opacity: 0;
+            transform: translateY(-1rem);
+            transition: opacity .6s ease-in-out, transform .6s ease-in-out;
+        }
 
-#page-content.visible {
-opacity: 1;
-transform: translateY(0);
-}
+        #page-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.ripple-ring {
-width: 100%;
-height: 100%;
-border: 2px solid rgba(234, 233, 233, 0.4);
-border-radius: 50%;
-animation: rippleAnim 3s infinite ease-in-out;
-position: absolute;
-z-index: -1;
-}
+        .ripple-ring {
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(234, 233, 233, 0.4);
+            border-radius: 50%;
+            animation: rippleAnim 3s infinite ease-in-out;
+            position: absolute;
+            z-index: -1;
+        }
 
-@keyframes rippleAnim {
-0% {
-transform: scale(1);
-opacity: 0.4;
-}
-100% {
-transform: scale(1.8);
-opacity: 0;
-}
-}
-</style>
+        @keyframes rippleAnim {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body class="scroll-smooth">
 
-<!-- Загрузчик страниц -->
-<div class="loader-container" id="loader">
-<div class="loader"></div>
-</div>
+    <!-- Page Loader -->
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+    </div>
 
-<!-- Основное содержимое -->
+<!-- Main Content -->
 <div id="page-content">
-<!-- Панель навигации -->
-<header>
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <!-- Navbar -->
+    <header>
+   <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <!-- Logo -->
-        <a href="{{ url(request()->is('ru*') ? '/ru' : '/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
             <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
         </a>
@@ -108,7 +108,7 @@ opacity: 0;
             aria-controls="navbar-default" aria-expanded="false">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M1 1h15M1 7h15M1 13h15" />
+                    d="M1 1h15M1 7h15M1 13h15" />
             </svg>
         </button>
 
@@ -137,7 +137,7 @@ opacity: 0;
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
-                                            class="w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        class="w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         {{ __('logout') }}
                                     </button>
                                 </form>
@@ -170,10 +170,7 @@ opacity: 0;
     </div>
 </nav>
 
-
-
-</header>
-
+    </header>
 <!-- Значок плавающего корабля -->
 <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
 <div class="absolute inset-0 flex items-center justify-center">
