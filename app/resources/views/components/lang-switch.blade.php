@@ -27,7 +27,12 @@
 @if ($shouldShowToggle)
     <a href="{{ $targetUrl }}"
        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 flag-emoji">
-        {!! $isRu ? '&#127475;&#127468;' : '&#127479;&#127482;' !!}
+        @if ($isRu)
+    <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f1f3-1f1ff.png" alt="NG" width="20" class="inline">
+@else
+    <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f1f7-1f1fa.png" alt="RU" width="20" class="inline">
+@endif
+
     </a>
 @endif
 <style>
