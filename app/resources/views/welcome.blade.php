@@ -94,25 +94,7 @@
 <div id="page-content">
     <!-- Navbar -->
     <header>
-    @php
-    use Illuminate\Support\Str;
-
-    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
-    $currentPath = request()->path();
-    $isRu = request()->is('ru') || request()->is('ru/*');
-
-    $normalizedPath = $currentPath === 'ru'
-        ? ''
-        : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
-
-    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
-
-    $targetUrl = $isRu
-        ? url($normalizedPath ?: '/')
-        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
-@endphp
-
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+   <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <!-- Logo -->
         <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -180,20 +162,13 @@
                 @endauth
 
                 <!-- Language Switcher -->
-                @if ($shouldShowToggle)
-                    <li>
-                        <a href="{{ $targetUrl }}"
-                           class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                            {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-                        </a>
-                    </li>
-                @endif
+                <li>
+                    @include('components.lang-switch')
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-
-
 
     </header>
 
