@@ -139,21 +139,26 @@ class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-tr
 @endauth
 
 @php
-    // Define exact paths where the toggle should be shown
     $toggleVisiblePaths = [
         '/', 'welcome', 'privacy', 'terms', 'dashboard', 'contact',
         'ru', 'ru/welcome', 'ru/privacy', 'ru/terms', 'ru/dashboard', 'ru/contact',
     ];
 
-    $currentPath = request()->path(); // e.g., '', 'ru/welcome'
+    $currentPath = request()->path(); // e.g., '', 'ru/welcome', 'dashboard'
     $shouldShowToggle = in_array($currentPath, $toggleVisiblePaths);
 
     $isRu = request()->is('ru') || request()->is('ru/*');
 
-    $normalizedPath = $currentPath === 'ru' ? '' : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
-    $targetUrl = $isRu
-        ? url($normalizedPath ?: '/')
-        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
+    if ($isRu) {
+        // Remove 'ru/' from currentPath or default to root
+        $normalizedPath = Str::after($currentPath, 'ru/');
+        $targetUrl = url($normalizedPath ?: '/');
+    } else {
+        // Prepend 'ru/' unless we're already on '/'
+        $targetUrl = $currentPath === '/' || $currentPath === ''
+            ? url('ru')
+            : url('ru/' . $currentPath);
+    }
 @endphp
 
 @if ($shouldShowToggle)
