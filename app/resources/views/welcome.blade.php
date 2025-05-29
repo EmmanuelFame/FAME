@@ -115,21 +115,21 @@
                             <li>
                                 <a href="{{ url('/dashboard') }}"
                                 class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                                    {{ __('messages.dashboard') }}
+                                    {{ __('dashboard') }}
                                 </a>
                             </li>
                         @else
                             <li>
                                 <a href="{{ route('login') }}"
                                 class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                    {{ __('messages.login') }}
+                                    {{ __('login') }}
                                 </a>
                             </li>
                             @if (Route::has('register'))
                                 <li>
                                     <a href="{{ route('register') }}"
                                     class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                        {{ __('messages.register') }}
+                                        {{ __('register') }}
                                     </a>
                                 </li>
                             @endif
