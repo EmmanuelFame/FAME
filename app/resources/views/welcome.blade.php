@@ -95,82 +95,81 @@
     <!-- Navbar -->
     <header>
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
-            <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-                <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-                    <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
-                </a>
-                <button data-collapse-toggle="navbar-default" type="button"
-                    class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-                    aria-controls="navbar-default" aria-expanded="false">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
-                </button>
-                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+            <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
+        </a>
 
-                        @auth
-                            <li>
-                                <a href="{{ url('/dashboard') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                                    Dashboard
-                                </a>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ route('login') }}"
-                                class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                    Login
-                                </a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li>
-                                    <a href="{{ route('register') }}"
-                                    class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                        Register
-                                    </a>
-                                </li>
-                            @endif
-                        @endauth
+        <button data-collapse-toggle="navbar-default" type="button"
+            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+            aria-controls="navbar-default" aria-expanded="false">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
 
-                       @php
-    use Illuminate\Support\Str;
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 
-    // Pages that have both translations
-    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+                @auth
+                    <li>
+                        <a href="{{ url('/dashboard') }}"
+                           class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
+                            Dashboard
+                        </a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}"
+                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            Login
+                        </a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li>
+                            <a href="{{ route('register') }}"
+                               class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                Register
+                            </a>
+                        </li>
+                    @endif
+                @endauth
 
-    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
-    $isRu = request()->is('ru') || request()->is('ru/*');
+                @php
+                    use Illuminate\Support\Str;
 
-    // Special case: if on /ru exactly, treat as root
-    if ($currentPath === 'ru') {
-        $normalizedPath = '';
-    } else {
-        $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
-    }
+                    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+                    $currentPath = request()->path();
+                    $isRu = request()->is('ru') || request()->is('ru/*');
 
-    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
+                    $normalizedPath = $currentPath === 'ru'
+                        ? ''
+                        : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
 
-    $targetUrl = $isRu
-        ? url($normalizedPath ?: '/')            // /ru → /
-        : url('ru' . ($currentPath ? '/' . $currentPath : '')); // / → /ru
-@endphp
+                    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
 
-@if ($shouldShowToggle)
-    <a href="{{ $targetUrl }}"
-       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-    </a>
-@endif
+                    $targetUrl = $isRu
+                        ? url($normalizedPath ?: '/')
+                        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
+                @endphp
 
+                @if ($shouldShowToggle)
+                    <li>
+                        <a href="{{ $targetUrl }}"
+                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+                        </a>
+                    </li>
+                @endif
 
+            </ul>
+        </div>
+    </div>
+</nav>
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
     </header>
 
         <!-- Floating Ship Icon -->

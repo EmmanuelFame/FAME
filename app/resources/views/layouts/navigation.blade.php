@@ -1,3 +1,25 @@
+@php
+    use Illuminate\Support\Str;
+
+    // Define translatable routes
+    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+
+    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
+    $isRu = request()->is('ru') || request()->is('ru/*');
+
+    // Normalize the path
+    $normalizedPath = $currentPath === 'ru'
+        ? ''
+        : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
+
+    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
+
+    // Determine the target URL
+    $targetUrl = $isRu
+        ? url($normalizedPath ?: '/')
+        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -21,37 +43,12 @@
             <!-- Right: Auth + Language -->
             <div class="hidden sm:flex sm:items-center sm:space-x-4">
                 <!-- Language Switcher -->
-                @php
-    use Illuminate\Support\Str;
-
-    // Pages that have both translations
-    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
-
-    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
-    $isRu = request()->is('ru') || request()->is('ru/*');
-
-    // Special case: if on /ru exactly, treat as root
-    if ($currentPath === 'ru') {
-        $normalizedPath = '';
-    } else {
-        $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
-    }
-
-    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
-
-    $targetUrl = $isRu
-        ? url($normalizedPath ?: '/')            // /ru → /
-        : url('ru' . ($currentPath ? '/' . $currentPath : '')); // / → /ru
-@endphp
-
-@if ($shouldShowToggle)
-    <a href="{{ $targetUrl }}"
-       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-    </a>
-@endif
-
-
+                @if ($shouldShowToggle)
+                    <a href="{{ $targetUrl }}"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+                    </a>
+                @endif
 
                 <!-- Auth Dropdown / Links -->
                 @auth
@@ -92,11 +89,11 @@
                 <button @click="open = ! open" class="p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-gray-900">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"/>
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16"/>
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12"/>
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
@@ -113,16 +110,14 @@
         </div>
 
         <!-- Mobile Language -->
+        @if ($shouldShowToggle)
         <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-600">
-            <form method="POST" action="{{ route('locale.change') }}">
-                @csrf
-                <input type="hidden" name="locale" value="{{ app()->getLocale() === 'en' ? 'ru' : 'en' }}">
-                <button type="submit" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                    {{ app()->getLocale() === 'en' ? 'РУССКИЙ' : 'ENGLISH' }}
-                </button>
-            </form>
-
+            <a href="{{ $targetUrl }}"
+               class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+            </a>
         </div>
+        @endif
 
         <!-- Mobile Auth Links -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

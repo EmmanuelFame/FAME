@@ -100,14 +100,17 @@ opacity: 0;
 <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Логотип Milestar" />
 <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
 </a>
+
 <button data-collapse-toggle="navbar-default" type="button"
 class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
 aria-controls="navbar-default" aria-expanded="false">
-<svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 17 14"
+xmlns="http://www.w3.org/2000/svg">
 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 d="M1 1h15M1 7h15M1 13h15"/>
 </svg>
 </button>
+
 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
 <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 
@@ -129,43 +132,39 @@ class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-tr
 <li>
 <a href="{{ route('register') }}"
 class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-Регистрация
+Зарегистрироваться
 </a>
 </li>
 @endif
 @endauth
 
-{{-- Удален переключатель локали --}}
 @php
-    use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
-    // Pages that have both translations
-    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+$translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
 
-    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
-    $isRu = request()->is('ru') || request()->is('ru/*');
+$currentPath = request()->path();
+$isRu = request()->is('ru') || request()->is('ru/*');
 
-    // Special case: if on /ru exactly, treat as root
-    if ($currentPath === 'ru') {
-        $normalizedPath = '';
-    } else {
-        $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
-    }
+$normalizedPath = $currentPath === 'ru'
+? ''
+: ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
 
-    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
+$shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
 
-    $targetUrl = $isRu
-        ? url($normalizedPath ?: '/')            // /ru → /
-        : url('ru' . ($currentPath ? '/' . $currentPath : '')); // / → /ru
+$targetUrl = $isRu
+? url($normalizedPath ?: '/')
+: url('ru' . ($currentPath ? '/' . $currentPath : ''));
 @endphp
 
 @if ($shouldShowToggle)
-    <a href="{{ $targetUrl }}"
-       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-    </a>
+<li>
+<a href="{{ $targetUrl }}"
+class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+{{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+</a>
+</li>
 @endif
-
 
 </ul>
 </div>
