@@ -17,7 +17,7 @@
     // Determine the target URL
     $targetUrl = $isRu
         ? url($normalizedPath ?: '/')
-        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
+        : url(path: 'ru' . ($currentPath ? '/' . $currentPath : ''));
 @endphp
 
 <style>
@@ -94,11 +94,11 @@
                         </x-slot>
                     </x-dropdown>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                    <a href="{{ route('login') }}" class="ml-2 mr-2 text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
                         {{ __('login') }}
                     </a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                        <a href="{{ route('register') }}" class="ml-2 mr-2 text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
                             {{ __('register') }}
                         </a>
                     @endif
