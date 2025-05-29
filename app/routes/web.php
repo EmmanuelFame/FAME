@@ -1,44 +1,42 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\LocaleController;
+use Illuminate\Support\Facades\Route;
 
-// Route group for optional locale ('en' or 'ru')
-Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ru']], function () {
-    
-    Route::get('/', function () {
-        $locale = request()->segment(1);
-        return view($locale === 'ru' ? 'ru.welcome' : 'welcome');
-    })->name('welcome');
+// Default English routes (no prefix)
+Route::get('/', fn () => view('welcome'));
+Route::get('/terms', fn () => view('terms'))->name('terms');
+Route::get('/privacy', fn () => view('privacy'))->name('privacy');
+Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::get('/terms', function () {
-        $locale = request()->segment(1);
-        return view($locale === 'ru' ? 'ru.terms' : 'terms');
-    })->name('terms');
-
-    Route::get('/privacy', function () {
-        $locale = request()->segment(1);
-        return view($locale === 'ru' ? 'ru.privacy' : 'privacy');
-    })->name('privacy');
-
-    Route::get('/dashboard', function () {
-        $locale = request()->segment(1);
-        return view($locale === 'ru' ? 'ru.dashboard' : 'dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
-
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    });
-
-    Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Language switch route (global)
-Route::post('/locale/change', [LocaleController::class, 'change'])->name('locale.change');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
-// Laravel Breeze/Fortify/etc. Auth routes
+
+// Russian-localized routes (under /ru)
+Route::prefix('ru')->group(function () {
+    Route::get('/', fn () => view('ru.welcome'));
+    Route::get('/terms', fn () => view('ru.terms'))->name('ru.terms');
+    Route::get('/privacy', fn () => view('ru.privacy'))->name('ru.privacy');
+    Route::get('/dashboard', fn () => view('ru.dashboard'))->middleware(['auth', 'verified'])->name('ru.dashboard');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('ru.profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('ru.profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('ru.profile.destroy');
+    });
+
+    Route::post('/contact', [ContactController::class, 'submit'])->name('ru.contact.submit');
+});
+
+// Locale switch POST endpoint
+Route::post('/locale/change', [App\Http\Controllers\LocaleController::class, 'change'])->name('locale.change');
+
+// Auth routes
 require __DIR__.'/auth.php';
