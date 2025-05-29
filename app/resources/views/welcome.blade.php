@@ -83,7 +83,6 @@
         }
     </style>
 </head>
-
 <body class="scroll-smooth">
 
     <!-- Page Loader -->
@@ -91,68 +90,66 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Main Content -->
-    <div id="page-content">
-        <!-- Navbar -->
-        <header>
-    
+<!-- Main Content -->
+<div id="page-content">
+    <!-- Navbar -->
+    <header>
             <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-            <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
-        </a>
-        <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-                aria-controls="navbar-default" aria-expanded="false">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-        </button>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                @auth
-                    <li>
-                        <a href="{{ url('/dashboard') }}"
-                           class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                            {{ __('messages.dashboard') }}
-                        </a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}"
-                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            {{ __('messages.login') }}
-                        </a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}"
-                               class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                {{ __('messages.register') }}
-                            </a>
-                        </li>
-                    @endif
-                @endauth
+                <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+                    <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+                        <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
+                    </a>
+                    <button data-collapse-toggle="navbar-default" type="button"
+                            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                            aria-controls="navbar-default" aria-expanded="false">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15"/>
+                        </svg>
+                    </button>
+                    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                        <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            {{-- Language Switcher --}}
+                            <li>
+                                <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
+                                    @csrf
+                                    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
+                                        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+                                        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
+                                    </select>
+                                </form>
+                            </li>
+                            @auth
+                                <li>
+                                    <a href="{{ url('/dashboard') }}"
+                                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
+                                        {{ __('messages.dashboard') }}
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ route('login') }}"
+                                    class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                        {{ __('messages.login') }}
+                                    </a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li>
+                                        <a href="{{ route('register') }}"
+                                        class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                            {{ __('messages.register') }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endauth
 
-                {{-- Language Switcher --}}
-                <li>
-                    <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
-                        @csrf
-                        <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
-                            <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
-                            <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
-                        </select>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-        </header>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+    </header>
 
         <!-- Floating Ship Icon -->
         <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
@@ -163,78 +160,75 @@
         </div>
 
        <!-- Hero Section -->
-<section x-data="carousel()" x-init="start()" class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
-    <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
+        <section x-data="carousel()" x-init="start()" class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
+            <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
 
-    <!-- Images -->
-    <div class="relative w-full h-full">
-        <template x-for="(image, index) in images" :key="index">
-            <div x-show="active === index"
-                 x-transition:enter="transition-opacity duration-1000"
-                 x-transition:enter-start="opacity-0"
-                 x-transition:enter-end="opacity-100"
-                 x-transition:leave="transition-opacity duration-1000"
-                 x-transition:leave-start="opacity-100"
-                 x-transition:leave-end="opacity-0"
-                 class="absolute inset-0 w-full h-full">
-                <img :src="image" alt="Slide image"
-                     class="w-full h-full object-cover object-center transition-transform duration-[5000ms] scale-100 hover:scale-105">
+            <!-- Images -->
+            <div class="relative w-full h-full">
+                <template x-for="(image, index) in images" :key="index">
+                    <div x-show="active === index"
+                        x-transition:enter="transition-opacity duration-1000"
+                        x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100"
+                        x-transition:leave="transition-opacity duration-1000"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                        class="absolute inset-0 w-full h-full">
+                        <img :src="image" alt="Slide image"
+                            class="w-full h-full object-cover object-center transition-transform duration-[5000ms] scale-100 hover:scale-105">
+                    </div>
+                </template>
             </div>
-        </template>
-    </div>
 
-    <!-- Manual Controls -->
-    <button @click="prev()" class="absolute z-30 p-2 transform -translate-y-1/2 rounded-full top-1/2 left-4 bg-white/20 hover:bg-white/40 backdrop-blur-sm">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
-    </button>
-    <button @click="next()" class="absolute z-30 p-2 transform -translate-y-1/2 rounded-full top-1/2 right-4 bg-white/20 hover:bg-white/40 backdrop-blur-sm">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-    </button>
+            <!-- Manual Controls -->
+            <button @click="prev()" class="absolute z-30 p-2 transform -translate-y-1/2 rounded-full top-1/2 left-4 bg-white/20 hover:bg-white/40 backdrop-blur-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <button @click="next()" class="absolute z-30 p-2 transform -translate-y-1/2 rounded-full top-1/2 right-4 bg-white/20 hover:bg-white/40 backdrop-blur-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
 
-    <!-- Call to Action -->
-    <div class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16">
-        <a href="#services" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
-           class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
-            Explore Our Services
-        </a>
-    </div>
-</section>
+            <!-- Call to Action -->
+            <div class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-16">
+                <a href="#services" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000"
+                class="inline-block px-8 py-4 text-lg font-semibold text-white transition-transform bg-yellow-600 shadow-lg rounded-xl hover:bg-yellow-700 hover:scale-105">
+                    Explore Our Services
+                </a>
+            </div>
+        </section>
 
-<!-- AlpineJS Script -->
-<script>
-    function carousel() {
-        return {
-            images: [
-                '{{ asset('images/wheaty.webp') }}',
-                '{{ asset('images/wheat_blue.webp') }}',
-                '{{ asset('images/wheat_marine.webp') }}',
-                '{{ asset('images/wheat_broker.webp') }}',
-                '{{ asset('images/wheat_one.webp') }}',
-                '{{ asset('images/wheat_two.webp') }}',
-            ],
-            active: 0,
-            interval: null,
-            start() {
-                this.interval = setInterval(() => {
-                    this.next();
-                }, 5000); // 5 seconds per slide
-            },
-            next() {
-                this.active = (this.active + 1) % this.images.length;
-            },
-            prev() {
-                this.active = (this.active - 1 + this.images.length) % this.images.length;
+        <!-- AlpineJS Script -->
+        <script>
+            function carousel() {
+                return {
+                    images: [
+                        '{{ asset('images/wheaty.webp') }}',
+                        '{{ asset('images/wheat_blue.webp') }}',
+                        '{{ asset('images/wheat_marine.webp') }}',
+                        '{{ asset('images/wheat_broker.webp') }}',
+                        '{{ asset('images/wheat_one.webp') }}',
+                        '{{ asset('images/wheat_two.webp') }}',
+                    ],
+                    active: 0,
+                    interval: null,
+                    start() {
+                        this.interval = setInterval(() => {
+                            this.next();
+                        }, 5000); // 5 seconds per slide
+                    },
+                    next() {
+                        this.active = (this.active + 1) % this.images.length;
+                    },
+                    prev() {
+                        this.active = (this.active - 1 + this.images.length) % this.images.length;
+                    }
+                };
             }
-        };
-    }
-</script>
-
-        <!-- Services section and others go here -->
-
+        </script>
          <!-- About section -->
          <section id="about" class="px-6 py-20 bg-white dark:bg-gray-900 lg:px-20">
             <div class="max-w-5xl p-3 mx-auto text-center">
@@ -263,11 +257,7 @@
                 </p>
             </div>
         </section>
-        
         <!--Service Section-->
-        
-        
-       
         <section id="services" class="py-20 bg-white dark:bg-gray-900">
             <div class="max-w-screen-xl px-4 mx-auto lg:px-6">
                 <div class="max-w-screen-md mx-auto mb-16 text-center" data-aos="fade-down">
@@ -309,67 +299,63 @@
                 </div>
             </div>
         </section>
-        
-
         <!--How it works section-->
         @push('head')
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    @endpush
+        @endpush
     
-    <section id="how-it-works" class="py-20 bg-[#FCFAF5] dark:bg-gray-800 px-6 lg:px-20">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
-                How It Works
-            </h2>
-            <p class="max-w-2xl mx-auto mb-12 text-lg text-gray-600 dark:text-gray-300">
-                Our brokerage process is structured to make wheat trade seamless, transparent, and secure for both buyers and suppliers.
-            </p>
-    
-            <!-- Progress Bar -->
-            <div class="flex items-center justify-center mb-12 space-x-4 text-yellow-700 dark:text-yellow-400">
-                <div class="flex items-center space-x-2">
-                    <span class="font-bold">Connect</span>
-                    <span>➡</span>
+        <section id="how-it-works" class="py-20 bg-[#FCFAF5] dark:bg-gray-800 px-6 lg:px-20">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
+                    How It Works
+                </h2>
+                <p class="max-w-2xl mx-auto mb-12 text-lg text-gray-600 dark:text-gray-300">
+                    Our brokerage process is structured to make wheat trade seamless, transparent, and secure for both buyers and suppliers.
+                </p>
+        
+                <!-- Progress Bar -->
+                <div class="flex items-center justify-center mb-12 space-x-4 text-yellow-700 dark:text-yellow-400">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold">Connect</span>
+                        <span>➡</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold">Trade</span>
+                        <span>➡</span>
+                    </div>
+                    <span class="font-bold">Deliver</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <span class="font-bold">Trade</span>
-                    <span>➡</span>
+        
+                <div class="grid grid-cols-1 gap-10 text-left md:grid-cols-3">
+                    <!-- Step 1: Connect -->
+                    <div data-aos="fade-up" data-aos-delay="100" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
+                        <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">🔌</div>
+                        <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Connect</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            We onboard Nigerian buyers and verify reliable Russian wheat suppliers, establishing secure and direct communication channels.
+                        </p>
+                    </div>
+        
+                    <!-- Step 2: Trade -->
+                    <div data-aos="fade-up" data-aos-delay="200" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
+                        <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">💼</div>
+                        <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Trade</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            We handle price negotiation, contract facilitation, compliance, and financial mechanisms like Letters of Credit (LCs).
+                        </p>
+                    </div>
+        
+                    <!-- Step 3: Deliver -->
+                    <div data-aos="fade-up" data-aos-delay="300" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
+                        <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">🚚</div>
+                        <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Deliver</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            We coordinate shipping, documentation, and customs clearance, ensuring smooth delivery of wheat from supplier to buyer.
+                        </p>
+                    </div>
                 </div>
-                <span class="font-bold">Deliver</span>
             </div>
-    
-            <div class="grid grid-cols-1 gap-10 text-left md:grid-cols-3">
-                <!-- Step 1: Connect -->
-                <div data-aos="fade-up" data-aos-delay="100" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
-                    <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">🔌</div>
-                    <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Connect</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        We onboard Nigerian buyers and verify reliable Russian wheat suppliers, establishing secure and direct communication channels.
-                    </p>
-                </div>
-    
-                <!-- Step 2: Trade -->
-                <div data-aos="fade-up" data-aos-delay="200" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
-                    <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">💼</div>
-                    <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Trade</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        We handle price negotiation, contract facilitation, compliance, and financial mechanisms like Letters of Credit (LCs).
-                    </p>
-                </div>
-    
-                <!-- Step 3: Deliver -->
-                <div data-aos="fade-up" data-aos-delay="300" class="p-6 bg-white rounded-lg shadow dark:bg-gray-900">
-                    <div class="mb-4 text-4xl text-yellow-700 dark:text-yellow-500">🚚</div>
-                    <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Deliver</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        We coordinate shipping, documentation, and customs clearance, ensuring smooth delivery of wheat from supplier to buyer.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
+        </section>
         <!-- CTA section -->
         <section id="contact" class="px-6 py-20 bg-white dark:bg-gray-900 lg:px-20">
             @if(session('success'))
@@ -395,7 +381,7 @@
                     });
                 });
             </script>
-        @endif
+            @endif
             <div class="max-w-2xl mx-auto text-center">
                 <h2 class="mb-6 text-3xl font-extrabold text-yellow-700 lg:text-4xl dark:text-yellow-400">
                     Get In Touch
@@ -434,35 +420,32 @@
                 </form>
             </div>
         </section>
-    </div>
+  
 
-  <footer class="bg-white shadow-sm dark:bg-gray-900">
-    <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
-        <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="{{ url('/') }}" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
-                <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
-            </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li><a href="#about" class="hover:underline me-4 md:me-6">{{ __('messages.about') }}</a></li>
-                <li><a href="#contact" class="hover:underline me-4 md:me-6">{{ __('messages.contact') }}</a></li>
-                <li><a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">{{ __('messages.privacy') }}</a></li>
-                <li><a href="{{ route('terms') }}" class="hover:underline me-4 md:me-6">{{ __('messages.terms') }}</a></li>
-            </ul>
-        </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2025 <a href="{{ url('/') }}" class="hover:underline">Milestar™</a>. {{ __('messages.rights') }}
-        </span>
-    </div>
-</footer>
+        <footer class="bg-white shadow-sm dark:bg-gray-900">
+            <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
+                <div class="sm:flex sm:items-center sm:justify-between">
+                    <a href="{{ url('/') }}" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
+                        <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
+                    </a>
+                    <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                        <li><a href="#about" class="hover:underline me-4 md:me-6">{{ __('messages.about') }}</a></li>
+                        <li><a href="#contact" class="hover:underline me-4 md:me-6">{{ __('messages.contact') }}</a></li>
+                        <li><a href="{{ route('privacy') }}" class="hover:underline me-4 md:me-6">{{ __('messages.privacy') }}</a></li>
+                        <li><a href="{{ route('terms') }}" class="hover:underline me-4 md:me-6">{{ __('messages.terms') }}</a></li>
+                    </ul>
+                </div>
+                <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                    © 2025 <a href="{{ url('/') }}" class="hover:underline">Milestar™</a>. {{ __('messages.rights') }}
+                </span>
+            </div>
+        </footer>
 
+</div>
 
-
-
-
-        
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
