@@ -94,86 +94,105 @@
 <div id="page-content">
     <!-- Navbar -->
     <header>
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-            <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
-        </a>
-
-        <button data-collapse-toggle="navbar-default" type="button"
-            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-            aria-controls="navbar-default" aria-expanded="false">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-        </button>
-
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-
-                @auth
-                    <li>
-                        <a href="{{ url('/dashboard') }}"
-                           class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                            Dashboard
-                        </a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}"
-                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            Login
-                        </a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}"
-                               class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                Register
-                            </a>
-                        </li>
-                    @endif
-                @endauth
-@php
+    @php
     use Illuminate\Support\Str;
 
-    // Define translatable routes
     $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
-
-    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
+    $currentPath = request()->path();
     $isRu = request()->is('ru') || request()->is('ru/*');
 
-    // Normalize the path
     $normalizedPath = $currentPath === 'ru'
         ? ''
         : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
 
     $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
 
-    // Determine the target URL
     $targetUrl = $isRu
         ? url($normalizedPath ?: '/')
         : url('ru' . ($currentPath ? '/' . $currentPath : ''));
 @endphp
 
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+        <!-- Logo -->
+        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+            <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
+        </a>
 
- <!-- Language Switcher -->
+        <!-- Hamburger (Mobile) -->
+        <button data-collapse-toggle="navbar-default" type="button"
+            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+            aria-controls="navbar-default" aria-expanded="false">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15" />
+            </svg>
+        </button>
+
+        <!-- Nav Links -->
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:p-0 md:mt-0 md:border-0 bg-gray-50 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                @auth
+                    <li>
+                        <a href="{{ route('dashboard') }}"
+                           class="inline-block px-5 py-1.5 text-sm text-[#1b1b18] dark:text-[#EDEDEC] border rounded-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
+                            {{ __('dashboard') }}
+                        </a>
+                    </li>
+                    <li class="relative group">
+                        <button class="text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none">
+                            {{ Auth::user()->name }}
+                        </button>
+                        <ul class="absolute hidden w-40 py-2 mt-2 space-y-1 bg-white border border-gray-200 rounded-md shadow-lg group-hover:block dark:bg-gray-800 dark:border-gray-700">
+                            <li>
+                                <a href="{{ route('profile.edit') }}"
+                                   class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    {{ __('profile') }}
+                                </a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        {{ __('logout') }}
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}"
+                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            {{ __('login') }}
+                        </a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li>
+                            <a href="{{ route('register') }}"
+                               class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                {{ __('register') }}
+                            </a>
+                        </li>
+                    @endif
+                @endauth
+
+                <!-- Language Switcher -->
                 @if ($shouldShowToggle)
-                    <a href="{{ $targetUrl }}"
-                        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-                    </a>
+                    <li>
+                        <a href="{{ $targetUrl }}"
+                           class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                            {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+                        </a>
+                    </li>
                 @endif
-
-
-
             </ul>
         </div>
     </div>
 </nav>
+
 
 
     </header>
