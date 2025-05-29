@@ -32,6 +32,9 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ru']], functi
     Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 });
 
+Route::post('/locale/change', [App\Http\Controllers\LocaleController::class, 'change'])->name('locale.change');
+
+
 // In routes/web.php
 require __DIR__.'/auth.php'; 
 

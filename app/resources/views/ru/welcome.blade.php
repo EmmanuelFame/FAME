@@ -136,6 +136,14 @@ class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-tr
 @endauth
 
 {{-- Удален переключатель локали --}}
+<form method="POST" action="{{ route('locale.change') }}">
+    @csrf
+    <input type="hidden" name="locale" value="{{ app()->getLocale() === 'en' ? 'ru' : 'en' }}">
+    <button type="submit" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+        {{ app()->getLocale() === 'en' ? 'РУССКИЙ' : 'ENGLISH' }}
+    </button>
+</form>
+
 </ul>
 </div>
 </div>

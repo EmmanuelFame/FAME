@@ -135,7 +135,14 @@
                             @endif
                         @endauth
 
-                        {{-- Removed Locale Switcher --}}
+                        <form method="POST" action="{{ route('locale.change') }}">
+                            @csrf
+                            <input type="hidden" name="locale" value="{{ app()->getLocale() === 'en' ? 'ru' : 'en' }}">
+                            <button type="submit" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                                {{ app()->getLocale() === 'en' ? 'РУССКИЙ' : 'ENGLISH' }}
+                            </button>
+                        </form>
+
                     </ul>
                 </div>
             </div>
