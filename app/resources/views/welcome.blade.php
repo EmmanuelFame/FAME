@@ -94,62 +94,63 @@
 <div id="page-content">
     <!-- Navbar -->
     <header>
-            <nav class="bg-white border-gray-200 dark:bg-gray-900">
-                <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-                    <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
-                        <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
-                    </a>
-                    <button data-collapse-toggle="navbar-default" type="button"
-                            class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-                            aria-controls="navbar-default" aria-expanded="false">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 1h15M1 7h15M1 13h15"/>
-                        </svg>
-                    </button>
-                    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                        <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                            
-                            @auth
-                                <li>
-                                    <a href="{{ url('/dashboard') }}"
-                                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
-                                        {{ __('messages.dashboard') }}
-                                    </a>
-                                </li>
-                            @else
-                                <li>
-                                    <a href="{{ route('login') }}"
-                                    class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                        {{ __('messages.login') }}
-                                    </a>
-                                </li>
-                                {{-- Language Switcher --}}
+        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+            <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+                <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
+                    <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
+                </a>
+                <button data-collapse-toggle="navbar-default" type="button"
+                        class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                        aria-controls="navbar-default" aria-expanded="false">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        
+                        @auth
                             <li>
-                                <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
-                                    @csrf
-                                    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
-                                        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
-                                        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
-                                    </select>
-                                </form>
+                                <a href="{{ url('/dashboard') }}"
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
+                                    {{ __('messages.dashboard') }}
+                                </a>
                             </li>
-                                @if (Route::has('register'))
-                                    <li>
-                                        <a href="{{ route('register') }}"
-                                        class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                            {{ __('messages.register') }}
-                                        </a>
-                                    </li>
-                                @endif
-                            @endauth
+                        @else
+                            <li>
+                                <a href="{{ route('login') }}"
+                                class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                    {{ __('messages.login') }}
+                                </a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li>
+                                    <a href="{{ route('register') }}"
+                                    class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                                        {{ __('messages.register') }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
 
-                            
-                        </ul>
-                    </div>
+                        {{-- Language Switcher - always visible --}}
+                        <li>
+                            <form action="{{ route('locale.change') }}" method="POST" class="sm:inline-block">
+                                @csrf
+                                <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
+                                    <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+                                    <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
+                                </select>
+                            </form>
+                        </li>
+
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </nav>
+
     </header>
 
         <!-- Floating Ship Icon -->
