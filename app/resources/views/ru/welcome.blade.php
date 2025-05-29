@@ -465,92 +465,94 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
 </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-AOS.init({
-продолжительность: 800,
-один раз: true,
-});
-</script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 800,
+                once: true,
+            });
+        </script>
+         
+         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const ship = document.getElementById("ship-container");
+          
+              // Bobbing animation
+              gsap.to("#ship-container", {
+                y: "-=15",
+                rotation: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                duration: 2
+                });
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-const ship = document.getElementById("ship-container");
+                
+          
+              // Sailing around the screen
+              const screenWidth = window.innerWidth;
+              const screenHeight = window.innerHeight;
+          
+              gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
+                .to(ship, { x: screenWidth - 100, y: 50, duration: 6, rotation: 5 })
+                .to(ship, { x: screenWidth - 100, y: screenHeight - 100, duration: 6, rotation: 10 })
+                .to(ship, { x: 0, y: screenHeight - 80, duration: 6, rotation: -5 })
+                .to(ship, { x: 0, y: 0, duration: 6, rotation: 0 });
+          
+              // Optional: smaller scale on mobile
+              if (screenWidth < 768) {
+                ship.style.transform = "scale(0.75)";
+              }
+            });
+          </script>
+          
+          <script>
+        const loaderContainer = document.querySelector('.loader-container');
+        const pageContent = document.querySelector('#page-content');
 
-// Анимация покачивания
-gsap.to("#ship-container", {
-y: "-=15",
-вращение: 3,
-повтор: -1,
-yoyo: true,
-ease: "sine.inOut",
-продолжительность: 2
-});
+        window.addEventListener('load', () => {
+            loaderContainer.classList.add('hidden');
+            pageContent.classList.add('visible');
+        })
+    </script>
+    <!-- JavaScript for Carousel + Loader -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loader fade out
+            const loader = document.getElementById('loader');
+            const pageContent = document.getElementById('page-content');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                pageContent.classList.add('visible');
+            }, 1000);
 
-// Плавание по экрану
-const screenWidth = window.innerWidth;
-const screenHeight = window.innerHeight;
+            // Carousel logic
+            const items = document.querySelectorAll('[data-carousel-item]');
+            let current = 0;
 
-gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
-.to(ship, { x: screenWidth - 100, y: 50, продолжительность: 6, вращение: 5 })
-.to(ship, { x: screenWidth - 100, y: screenHeight - 100, продолжительность: 6, поворот: 10 })
-.to(ship, { x: 0, y: screenHeight - 80, продолжительность: 6, поворот: -5 })
-.to(ship, { x: 0, y: 0, продолжительность: 6, поворот: 0 });
+            function showNextSlide() {
+                items[current].classList.remove('opacity-100');
+                items[current].classList.add('opacity-0');
+                setTimeout(() => {
+                    items[current].classList.add('hidden');
+                    current = (current + 1) % items.length;
+                    items[current].classList.remove('hidden');
+                    requestAnimationFrame(() => {
+                        items[current].classList.remove('opacity-0');
+                        items[current].classList.add('opacity-100');
+                    });
+                }, 700);
+            }
 
-// Необязательно: меньший масштаб на мобильном устройстве
-if (screenWidth < 768) {
-ship.style.transform = "scale(0.75)";
-}
-});
-</script>
+            setInterval(showNextSlide, 7000);
+        });
+    </script>
 
-<script>
-const loaderContainer = document.querySelector('.loader-container');
-const pageContent = document.querySelector('#page-content');
+    <!-- AOS Init -->
 
-window.addEventListener('load', () => {
-loaderContainer.classList.add('hidden');
-pageContent.classList.add('visible');
-})
-</script>
-<!-- JavaScript для карусели + загрузчика -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-// Постепенное исчезновение загрузчика
-const loader = document.getElementById('loader');
-const pageContent = document.getElementById('page-content');
-setTimeout(() => {
-loader.classList.add('hidden');
-pageContent.classList.add('visible');
-}, 1000);
-
-// Логика карусели
-const items = document.querySelectorAll('[data-carousel-item]');
-let current = 0;
-
-function showNextSlide() {
-items[current].classList.remove('opacity-100');
-items[current].classList.add('opacity-0');
-setTimeout(() => {
-items[current].classList.add('hidden');
-current = (current + 1) % items.length;
-items[current].classList.remove('hidden');
-requestAnimationFrame(() => {
-items[current].classList.remove('opacity-0');
-items[current].classList.add('opacity-100');
-});
-}, 700);
-}
-
-setInterval(showNextSlide, 7000);
-});
-</script>
-
-<!-- Инициализация AOS -->
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({ once: true });</script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ once: true });</script>
 </body>
 </html>
