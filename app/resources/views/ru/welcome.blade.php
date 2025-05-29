@@ -21,7 +21,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-.loader-container {
+/* .loader-container {
 position: fixed;
 inset: 0;
 z-index: 999;
@@ -29,7 +29,7 @@ background-color: #0c0603;
 display: grid;
 place-content: center;
 transition: opacity .4s ease-in-out, visible .4s ease-in-out;
-}
+} */
 
 .loader {
 width: 4rem;
