@@ -12,7 +12,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('navigation.dashboard') }}
+                        {{ __('dashboard') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -44,23 +44,23 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('navigation.profile') }}
+                                {{ __('profile') }}
                             </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('navigation.logout') }}
+                                    {{ __('logout') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
                     </x-dropdown>
                 @else
                     <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                        {{ __('navigation.login') }}
+                        {{ __('login') }}
                     </a>
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                            {{ __('navigation.register') }}
+                            {{ __('register') }}
                         </a>
                     @endif
                 @endauth
@@ -82,7 +82,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('navigation.dashboard') }}
+                {{ __('dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -91,7 +91,7 @@
             <form method="POST" action="{{ route('locale.change') }}">
                 @csrf
                 <label for="locale" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {{ __('navigation.language') }}
+                    {{ __('language') }}
                 </label>
                 <select name="locale" id="locale" onchange="this.form.submit()" class="block w-full px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
                     <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
@@ -115,13 +115,13 @@
             <div class="mt-3 space-y-1">
                 @auth
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('navigation.profile') }}
+                        {{ __('profile') }}
                     </x-responsive-nav-link>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <x-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('navigation.logout') }}
+                            {{ __('logout') }}
                         </x-responsive-nav-link>
                     </form>
                 @endauth
