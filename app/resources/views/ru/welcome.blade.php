@@ -527,38 +527,7 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
             pageContent.classList.add('visible');
         })
     </script>
-    <!-- JavaScript for Carousel + Loader -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Loader fade out
-            const loader = document.getElementById('loader');
-            const pageContent = document.getElementById('page-content');
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                pageContent.classList.add('visible');
-            }, 1000);
-
-            // Carousel logic
-            const items = document.querySelectorAll('[data-carousel-item]');
-            let current = 0;
-
-            function showNextSlide() {
-                items[current].classList.remove('opacity-100');
-                items[current].classList.add('opacity-0');
-                setTimeout(() => {
-                    items[current].classList.add('hidden');
-                    current = (current + 1) % items.length;
-                    items[current].classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        items[current].classList.remove('opacity-0');
-                        items[current].classList.add('opacity-100');
-                    });
-                }, 700);
-            }
-
-            setInterval(showNextSlide, 7000);
-        });
-    </script>
+    
 
     <!-- AOS Init -->
 
