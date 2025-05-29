@@ -479,37 +479,41 @@
         </script>
          
          <script>
-            document.addEventListener("DOMContentLoaded", function () {
-              const ship = document.getElementById("ship-container");
-          
-              // Bobbing animation
-              gsap.to("#ship-container", {
-                y: "-=15",
-                rotation: 3,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                duration: 2
-                });
+document.addEventListener("DOMContentLoaded", function () {
+    const ship = document.getElementById("ship-container");
 
-                
-          
-              // Sailing around the screen
-              const screenWidth = window.innerWidth;
-              const screenHeight = window.innerHeight;
-          
-              gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
-                .to(ship, { x: screenWidth - 100, y: 50, duration: 6, rotation: 5 })
-                .to(ship, { x: screenWidth - 100, y: screenHeight - 100, duration: 6, rotation: 10 })
-                .to(ship, { x: 0, y: screenHeight - 80, duration: 6, rotation: -5 })
-                .to(ship, { x: 0, y: 0, duration: 6, rotation: 0 });
-          
-              // Optional: smaller scale on mobile
-              if (screenWidth < 768) {
-                ship.style.transform = "scale(0.75)";
-              }
-            });
-          </script>
+    const shipWidth = ship.offsetWidth;
+    const shipHeight = ship.offsetHeight;
+
+    const padding = 20; // Optional padding from edges
+
+    const maxX = window.innerWidth - shipWidth - padding;
+    const maxY = window.innerHeight - shipHeight - padding;
+
+    // Bobbing animation
+    gsap.to("#ship-container", {
+        y: "-=15",
+        rotation: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        duration: 2
+    });
+
+    // Sailing around the screen within the viewport
+    gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
+        .to(ship, { x: maxX, y: padding, duration: 6, rotation: 5 })
+        .to(ship, { x: maxX, y: maxY, duration: 6, rotation: 10 })
+        .to(ship, { x: padding, y: maxY, duration: 6, rotation: -5 })
+        .to(ship, { x: padding, y: padding, duration: 6, rotation: 0 });
+
+    // Scale down on mobile
+    if (window.innerWidth < 768) {
+        ship.style.transform = "scale(0.75)";
+    }
+});
+</script>
+
           
           <script>
         const loaderContainer = document.querySelector('.loader-container');
@@ -520,7 +524,6 @@
             pageContent.classList.add('visible');
         })
     </script>
-    <!-- JavaScript for Carousel + Loader -->
    
 
     <!-- AOS Init -->
