@@ -137,19 +137,24 @@ class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-tr
 
 {{-- Удален переключатель локали --}}
 @php
-    // Pages that have both EN and RU versions
-    $translatablePages = ['welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+    use Illuminate\Support\Str;
 
-    $currentPath = request()->path(); // e.g., 'ru/privacy' or 'privacy'
-    $isRu = request()->is('ru/*');
-    
-    // Extract the base page name (e.g., 'privacy' from 'ru/privacy')
+    // List of routes that have both translations
+    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+
+    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
+    $isRu = request()->is('ru') || request()->is('ru/*');
+
+    // Get the base route name, e.g., 'dashboard' from 'ru/dashboard'
     $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
 
-    $shouldShowToggle = in_array($normalizedPath, $translatablePages);
+    // Check if the toggle should show
+    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
 
-    // Build the toggle URL
-    $targetUrl = $isRu ? url($normalizedPath) : url('ru/' . $normalizedPath);
+    // Build the target URL for toggle
+    $targetUrl = $isRu
+        ? url($normalizedPath ?: '/') // from /ru/privacy -> /privacy (or /)
+        : url('ru/' . ($currentPath ?: '')); // from /privacy -> /ru/privacy (or /ru)
 @endphp
 
 @if ($shouldShowToggle)

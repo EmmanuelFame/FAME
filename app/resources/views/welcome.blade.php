@@ -135,28 +135,34 @@
                             @endif
                         @endauth
 
-                                        @php
-                        // Pages that have both EN and RU versions
-                        $translatablePages = ['welcome', 'privacy', 'terms', 'dashboard', 'contact'];
+                       @php
+    use Illuminate\Support\Str;
 
-                        $currentPath = request()->path(); // e.g., 'ru/privacy' or 'privacy'
-                        $isRu = request()->is('ru/*');
-                        
-                        // Extract the base page name (e.g., 'privacy' from 'ru/privacy')
-                        $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
+    // List of routes that have both translations
+    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
 
-                        $shouldShowToggle = in_array($normalizedPath, $translatablePages);
+    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
+    $isRu = request()->is('ru') || request()->is('ru/*');
 
-                        // Build the toggle URL
-                        $targetUrl = $isRu ? url($normalizedPath) : url('ru/' . $normalizedPath);
-                    @endphp
+    // Get the base route name, e.g., 'dashboard' from 'ru/dashboard'
+    $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
 
-                    @if ($shouldShowToggle)
-                        <a href="{{ $targetUrl }}"
-                        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                            {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-                        </a>
-                    @endif
+    // Check if the toggle should show
+    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
+
+    // Build the target URL for toggle
+    $targetUrl = $isRu
+        ? url($normalizedPath ?: '/') // from /ru/privacy -> /privacy (or /)
+        : url('ru/' . ($currentPath ?: '')); // from /privacy -> /ru/privacy (or /ru)
+@endphp
+
+@if ($shouldShowToggle)
+    <a href="{{ $targetUrl }}"
+       class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+    </a>
+@endif
+
 
 
                     </ul>
