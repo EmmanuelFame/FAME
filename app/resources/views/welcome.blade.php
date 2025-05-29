@@ -159,12 +159,13 @@
     </header>
 
         <!-- Floating Ship Icon -->
-        <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px;">
+        <div id="ship-container" class="fixed z-50" style="width: 80px; height: 80px; top: 0; left: 0;">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="ripple-ring"></div>
             </div>
             <img id="ship" src="{{ asset('images/ship.svg') }}" alt="Ship" class="w-full h-full">
         </div>
+
 
        <!-- Hero Section -->
         <section x-data="carousel()" x-init="start()" class="relative overflow-hidden h-[85vh] sm:h-[80vh] md:h-[90vh] lg:h-[95vh] xl:h-screen">
@@ -465,23 +466,20 @@
         </script>
          
          <script>
-           document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const ship = document.getElementById("ship-container");
 
-  // Dimensions and padding
-  const shipWidth = 80; // Your defined width
-  const shipHeight = 80;
-  const margin = 20;
-
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-
-  const maxX = screenWidth - shipWidth - margin;
-  const maxY = screenHeight - shipHeight - margin;
+  // Define your safe animation box
+  const floatBox = {
+    xMin: window.innerWidth - 200, // 200px from left edge (near bottom-right)
+    xMax: window.innerWidth - 100, // stays within 100px horizontally
+    yMin: window.innerHeight - 200,
+    yMax: window.innerHeight - 100
+  };
 
   // Bobbing animation
-  gsap.to("#ship-container", {
-    y: "-=15",
+  gsap.to(ship, {
+    y: "-=10",
     rotation: 3,
     repeat: -1,
     yoyo: true,
@@ -489,20 +487,20 @@
     duration: 2
   });
 
-  // Sailing animation within screen bounds
-  gsap.timeline({ repeat: -1, defaults: { ease: "power1.inOut" } })
-    .to(ship, { x: maxX, y: margin, duration: 6, rotation: 5 })
-    .to(ship, { x: maxX, y: maxY, duration: 6, rotation: 10 })
-    .to(ship, { x: margin, y: maxY, duration: 6, rotation: -5 })
-    .to(ship, { x: margin, y: margin, duration: 6, rotation: 0 });
+  // Constrained sailing animation (small loop)
+  gsap.timeline({ repeat: -1, defaults: { ease: "sine.inOut", duration: 4 } })
+    .to(ship, { x: floatBox.xMax, y: floatBox.yMin, rotation: 5 })
+    .to(ship, { x: floatBox.xMax, y: floatBox.yMax, rotation: 10 })
+    .to(ship, { x: floatBox.xMin, y: floatBox.yMax, rotation: -5 })
+    .to(ship, { x: floatBox.xMin, y: floatBox.yMin, rotation: 0 });
 
-  // Optional: scale on mobile
-  if (screenWidth < 768) {
+  // Optional: smaller on mobile
+  if (window.innerWidth < 768) {
     ship.style.transform = "scale(0.75)";
   }
 });
+</script>
 
-           </script>
           
           <script>
         const loaderContainer = document.querySelector('.loader-container');
