@@ -1,26 +1,31 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LocaleController;
 
-// Route Group with Optional Locale Prefix (default: en)
+// Route group for optional locale ('en' or 'ru')
 Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ru']], function () {
-
+    
     Route::get('/', function () {
-        return view(request()->segment(1) === 'ru' ? 'ru.welcome' : 'welcome');
+        $locale = request()->segment(1);
+        return view($locale === 'ru' ? 'ru.welcome' : 'welcome');
     })->name('welcome');
 
     Route::get('/terms', function () {
-        return view(request()->segment(1) === 'ru' ? 'ru.terms' : 'terms');
+        $locale = request()->segment(1);
+        return view($locale === 'ru' ? 'ru.terms' : 'terms');
     })->name('terms');
 
     Route::get('/privacy', function () {
-        return view(request()->segment(1) === 'ru' ? 'ru.privacy' : 'privacy');
+        $locale = request()->segment(1);
+        return view($locale === 'ru' ? 'ru.privacy' : 'privacy');
     })->name('privacy');
 
     Route::get('/dashboard', function () {
-        return view(request()->segment(1) === 'ru' ? 'ru.dashboard' : 'dashboard');
+        $locale = request()->segment(1);
+        return view($locale === 'ru' ? 'ru.dashboard' : 'dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::middleware('auth')->group(function () {
@@ -32,9 +37,8 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ru']], functi
     Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 });
 
-Route::post('/locale/change', [App\Http\Controllers\LocaleController::class, 'change'])->name('locale.change');
+// Language switch route (global)
+Route::post('/locale/change', [LocaleController::class, 'change'])->name('locale.change');
 
-
-// In routes/web.php
-require __DIR__.'/auth.php'; 
-
+// Laravel Breeze/Fortify/etc. Auth routes
+require __DIR__.'/auth.php';
