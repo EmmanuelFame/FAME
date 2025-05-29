@@ -114,7 +114,7 @@
         <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-600">
             <a href="{{ $targetUrl }}"
                class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-                {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+                {{ $isRu ? '🇳🇬' : '🇷🇺' }}
             </a>
         </div>
         @endif

@@ -27,6 +27,6 @@
 @if ($shouldShowToggle)
     <a href="{{ $targetUrl }}"
        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
-        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+        {{ $isRu ? '🇳🇬' : '🇷🇺' }}
     </a>
 @endif
