@@ -4,14 +4,17 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
 
 class SetLocale
 {
     public function handle($request, Closure $next)
     {
-        $locale = Session::get('locale', config('app.locale'));
-        App::setLocale($locale);
+        $locale = $request->segment(1); // gets 'ru' from '/ru/privacy'
+
+        if (in_array($locale, ['en', 'ru'])) {
+            App::setLocale($locale);
+        }
+
         return $next($request);
     }
 }
