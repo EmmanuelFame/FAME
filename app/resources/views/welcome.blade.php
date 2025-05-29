@@ -135,22 +135,24 @@
                             @endif
                         @endauth
 
-                       @php
-                        $translatableRoutes = ['/', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
-                        $currentPath = request()->path();
-                        $isRu = request()->is('ru*');
+                                        @php
+                        // Pages that have both EN and RU versions
+                        $translatablePages = ['welcome', 'privacy', 'terms', 'dashboard', 'contact'];
 
-                        // Normalize path for comparison
+                        $currentPath = request()->path(); // e.g., 'ru/privacy' or 'privacy'
+                        $isRu = request()->is('ru/*');
+                        
+                        // Extract the base page name (e.g., 'privacy' from 'ru/privacy')
                         $normalizedPath = $isRu ? Str::after($currentPath, 'ru/') : $currentPath;
 
-                        $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
-                        $targetUrl = $isRu
-                            ? preg_replace('/^ru\//', '', $currentPath)
-                            : 'ru/' . $currentPath;
+                        $shouldShowToggle = in_array($normalizedPath, $translatablePages);
+
+                        // Build the toggle URL
+                        $targetUrl = $isRu ? url($normalizedPath) : url('ru/' . $normalizedPath);
                     @endphp
 
                     @if ($shouldShowToggle)
-                        <a href="{{ url($targetUrl) }}"
+                        <a href="{{ $targetUrl }}"
                         class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
                             {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
                         </a>
