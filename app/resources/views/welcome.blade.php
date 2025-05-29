@@ -95,7 +95,8 @@
     <div id="page-content">
         <!-- Navbar -->
         <header>
-     <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    
+            <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
@@ -137,14 +138,13 @@
 
                 {{-- Language Switcher --}}
                 <li>
-                    <form action="{{ route('locale.change') }}" method="POST" class="hidden ml-4 sm:block">
-    @csrf
-    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
-        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
-        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
-    </select>
-</form>
-
+                    <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
+                        @csrf
+                        <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
+                            <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+                            <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
+                        </select>
+                    </form>
                 </li>
             </ul>
         </div>
