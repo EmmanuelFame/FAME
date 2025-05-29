@@ -110,16 +110,7 @@
                     </button>
                     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                            {{-- Language Switcher --}}
-                            <li>
-                                <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
-                                    @csrf
-                                    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
-                                        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
-                                        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
-                                    </select>
-                                </form>
-                            </li>
+                            
                             @auth
                                 <li>
                                     <a href="{{ url('/dashboard') }}"
@@ -134,6 +125,16 @@
                                         {{ __('messages.login') }}
                                     </a>
                                 </li>
+                                {{-- Language Switcher --}}
+                            <li>
+                                <form action="{{ route('locale.change') }}" method="POST" class="hidden sm:inline-block">
+                                    @csrf
+                                    <select name="locale" onchange="this.form.submit()" class="px-2 py-1 text-sm bg-white border rounded dark:bg-gray-900 dark:text-white">
+                                        <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+                                        <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>RU</option>
+                                    </select>
+                                </form>
+                            </li>
                                 @if (Route::has('register'))
                                     <li>
                                         <a href="{{ route('register') }}"
