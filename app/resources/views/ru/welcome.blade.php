@@ -96,7 +96,7 @@ opacity: 0;
 <header>
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a href="{{ url('/ru') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ url($isRu = request()->is('ru') || request()->is('ru/*') ? '/ru' : '/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Логотип Milestar" />
             <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
         </a>
@@ -115,26 +115,24 @@ opacity: 0;
 
                 @auth
                     <li>
-                        <a href="{{ url('/ru/dashboard') }}"
+                        <a href="{{ url($isRu ? '/ru/dashboard' : '/dashboard') }}"
                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border rounded-sm text-sm border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b]">
                             Панель
                         </a>
                     </li>
                 @else
                     <li>
-                        <a href="{{ route('login') }}"
+                        <a href="{{ url($isRu ? '/ru/login' : '/login') }}"
                            class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                             Войти
                         </a>
                     </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}"
-                               class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                                Регистрация
-                            </a>
-                        </li>
-                    @endif
+                    <li>
+                        <a href="{{ url($isRu ? '/ru/register' : '/register') }}"
+                           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            Регистрация
+                        </a>
+                    </li>
                 @endauth
 
                 @php
@@ -164,6 +162,7 @@ opacity: 0;
         </div>
     </div>
 </nav>
+
 
 </header>
 
@@ -437,23 +436,32 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
 <footer class="bg-white shadow-sm dark:bg-gray-900">
     <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="{{ url('/ru') }}" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
+            <a href="{{ url(request()->is('ru*') ? '/ru' : '/') }}" class="flex items-center mb-4 space-x-3 sm:mb-0 rtl:space-x-reverse">
                 <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Логотип Milestar" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li><a href="#about" class="hover:underline me-4 md:me-6">О нас</a></li>
                 <li><a href="#contact" class="hover:underline me-4 md:me-6">Контакты</a></li>
-                <li><a href="{{ route('ru.privacy') }}" class="hover:underline me-4 md:me-6">Политика конфиденциальности</a></li>
-                <li><a href="{{ route('ru.terms') }}" class="hover:underline me-4 md:me-6">Условия и положения</a></li>
+                <li>
+                    <a href="{{ url(request()->is('ru*') ? '/ru/privacy' : '/privacy') }}" class="hover:underline me-4 md:me-6">
+                        {{ request()->is('ru*') ? 'Политика конфиденциальности' : 'Privacy Policy' }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url(request()->is('ru*') ? '/ru/terms' : '/terms') }}" class="hover:underline me-4 md:me-6">
+                        {{ request()->is('ru*') ? 'Условия и положения' : 'Terms and Conditions' }}
+                    </a>
+                </li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2025 <a href="{{ url('/ru') }}" class="hover:underline">Milestar™</a>. Все права защищены.
+            © 2025 <a href="{{ url(request()->is('ru*') ? '/ru' : '/') }}" class="hover:underline">Milestar™</a>. Все права защищены.
         </span>
     </div>
 </footer>
+
 
 </div>
 
