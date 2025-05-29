@@ -22,20 +22,21 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
+
 // Russian-localized routes (under /ru)
 Route::prefix('ru')->group(function () {
-    Route::get('/', fn () => view('ru.welcome'))->name('ru.welcome'); // Add name
+    Route::get('/', fn () => view('ru.welcome'));
     Route::get('/terms', fn () => view('ru.terms'))->name('ru.terms');
     Route::get('/privacy', fn () => view('ru.privacy'))->name('ru.privacy');
     Route::get('/dashboard', fn () => view('ru.dashboard'))->middleware(['auth', 'verified'])->name('ru.dashboard');
 
     Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('ru.profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('ru.profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('ru.profile.destroy');
+    });
 
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+    Route::post('/contact', [ContactController::class, 'submit'])->name('ru.contact.submit');
 });
 
 // Locale switch POST endpoint

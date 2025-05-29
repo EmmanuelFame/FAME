@@ -97,7 +97,7 @@ opacity: 0;
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <!-- Logo -->
-        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ url(request()->is('ru*') ? '/ru' : '/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/milestar_logo.jpg') }}" class="h-8" alt="Milestar Logo" />
             <span class="self-center text-2xl font-semibold dark:text-white">Milestar</span>
         </a>
@@ -108,7 +108,7 @@ opacity: 0;
             aria-controls="navbar-default" aria-expanded="false">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 17 14" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M1 1h15M1 7h15M1 13h15" />
+                      d="M1 1h15M1 7h15M1 13h15" />
             </svg>
         </button>
 
@@ -137,7 +137,7 @@ opacity: 0;
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
-                                        class="w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            class="w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         {{ __('logout') }}
                                     </button>
                                 </form>
@@ -169,6 +169,8 @@ opacity: 0;
         </div>
     </div>
 </nav>
+
+
 
 </header>
 
@@ -447,8 +449,8 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Milestar</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li><a href="#about" class="hover:underline me-4 md:me-6">О нас</a></li>
-                <li><a href="#contact" class="hover:underline me-4 md:me-6">Контакты</a></li>
+                <li><a href="{{ url(request()->is('ru*') ? '/ru#about' : '/#about') }}" class="hover:underline me-4 md:me-6">О нас</a></li>
+                <li><a href="{{ url(request()->is('ru*') ? '/ru#contact' : '/#contact') }}" class="hover:underline me-4 md:me-6">Контакты</a></li>
                 <li>
                     <a href="{{ url(request()->is('ru*') ? '/ru/privacy' : '/privacy') }}" class="hover:underline me-4 md:me-6">
                         {{ request()->is('ru*') ? 'Политика конфиденциальности' : 'Privacy Policy' }}
@@ -459,6 +461,9 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
                         {{ request()->is('ru*') ? 'Условия и положения' : 'Terms and Conditions' }}
                     </a>
                 </li>
+                <li>
+                    @include('components.lang-switch')
+                </li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
@@ -467,6 +472,8 @@ class="px-6 py-3 font-semibold text-white transition bg-yellow-600 rounded-md sh
         </span>
     </div>
 </footer>
+
+
 
 
 </div>
