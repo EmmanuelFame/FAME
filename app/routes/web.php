@@ -4,8 +4,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
+
+
+
 // Default English routes (no prefix)
-Route::get('/', fn () => view('welcome'));
+
+Route::get('/', fn () => view('welcome'))->name('welcome'); // Add name
 Route::get('/terms', fn () => view('terms'))->name('terms');
 Route::get('/privacy', fn () => view('privacy'))->name('privacy');
 Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
@@ -18,10 +22,9 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
-
 // Russian-localized routes (under /ru)
 Route::prefix('ru')->group(function () {
-    Route::get('/', fn () => view('ru.welcome'));
+    Route::get('/', fn () => view('ru.welcome'))->name('ru.welcome'); // Add name
     Route::get('/terms', fn () => view('ru.terms'))->name('ru.terms');
     Route::get('/privacy', fn () => view('ru.privacy'))->name('ru.privacy');
     Route::get('/dashboard', fn () => view('ru.dashboard'))->middleware(['auth', 'verified'])->name('ru.dashboard');
