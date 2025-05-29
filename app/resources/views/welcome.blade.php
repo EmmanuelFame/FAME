@@ -138,36 +138,35 @@
                     @endif
                 @endauth
 @php
-    $toggleVisiblePaths = [
-        '/', 'welcome', 'privacy', 'terms', 'dashboard', 'contact',
-        'ru', 'ru/welcome', 'ru/privacy', 'ru/terms', 'ru/dashboard', 'ru/contact',
-    ];
+    use Illuminate\Support\Str;
 
-    $currentPath = request()->path(); // e.g., '', 'ru/welcome', 'dashboard'
-    $shouldShowToggle = in_array($currentPath, $toggleVisiblePaths);
+    // Define translatable routes
+    $translatableRoutes = ['', 'welcome', 'privacy', 'terms', 'dashboard', 'contact'];
 
+    $currentPath = request()->path(); // e.g., '', 'dashboard', 'ru/dashboard'
     $isRu = request()->is('ru') || request()->is('ru/*');
 
-    if ($isRu) {
-        // Remove 'ru/' from currentPath or default to root
-        $normalizedPath = Str::after($currentPath, 'ru/');
-        $targetUrl = url($normalizedPath ?: '/');
-    } else {
-        // Prepend 'ru/' unless we're already on '/'
-        $targetUrl = $currentPath === '/' || $currentPath === ''
-            ? url('ru')
-            : url('ru/' . $currentPath);
-    }
+    // Normalize the path
+    $normalizedPath = $currentPath === 'ru'
+        ? ''
+        : ($isRu ? Str::after($currentPath, 'ru/') : $currentPath);
+
+    $shouldShowToggle = in_array($normalizedPath, $translatableRoutes);
+
+    // Determine the target URL
+    $targetUrl = $isRu
+        ? url($normalizedPath ?: '/')
+        : url('ru' . ($currentPath ? '/' . $currentPath : ''));
 @endphp
 
-@if ($shouldShowToggle)
-    <li>
-        <a href="{{ $targetUrl }}"
-           class="block px-3 py-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-            {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
-        </a>
-    </li>
-@endif
+
+ <!-- Language Switcher -->
+                @if ($shouldShowToggle)
+                    <a href="{{ $targetUrl }}"
+                        class="text-sm font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">
+                        {{ $isRu ? 'ENGLISH' : 'РУССКИЙ' }}
+                    </a>
+                @endif
 
 
 
